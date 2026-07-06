@@ -58,9 +58,9 @@ export default function Navbar() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="pointer-events-auto rounded-full bg-white px-6 py-3 text-base font-semibold tracking-tight text-black shadow-[0_2px_10px_rgba(0,0,0,0.06)]"
+          className="pointer-events-auto rounded-full bg-white px-6 py-3 text-base font-semibold tracking-normal text-black shadow-[0_2px_10px_rgba(0,0,0,0.06)]"
         >
-          Hanzo
+          Ishraq
         </motion.a>
 
         {/* Menu toggle + dropdown */}
