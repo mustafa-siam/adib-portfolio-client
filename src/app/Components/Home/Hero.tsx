@@ -321,7 +321,7 @@ export default function Hero() {
 
               <AnimatedText
                 text="Products"
-                className="text-5xl sm:text-8xl font-medium tracking-[-0.065em] leading-[0.92] text-[#111]"
+                className="text-5xl sm:text-8xl sm:mt-0 mt-4 font-medium tracking-[-0.065em] leading-[0.92] text-[#111]"
               />
             </div>
           </motion.div>
