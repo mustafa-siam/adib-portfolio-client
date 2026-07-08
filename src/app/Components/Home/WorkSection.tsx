@@ -132,7 +132,7 @@ export default function WorkSection() {
             <MarqueeColumn images={leftImages} duration={15} />
           </div>
 
-          <div className="relative h-full pt-28">
+          <div className="relative h-full pt-10">
             <MarqueeColumn images={rightImages} duration={40} />
           </div>
         </div>
