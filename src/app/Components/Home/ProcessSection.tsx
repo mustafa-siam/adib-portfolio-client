@@ -41,7 +41,7 @@ const processSteps: ProcessStep[] = [
 
 export default function ProcessSection() {
   return (
-    <section className="w-full bg-[#efefef] py-24 px-4 sm:px-8 lg:px-16 text-neutral-950 font-sans selection:bg-neutral-300">
+    <section className="w-full px-4 py-2 sm:px-8 lg:px-16 text-neutral-950">
       <div className="mx-auto max-w-6xl">
         
         {/* --- HEADER BLOCK --- */}

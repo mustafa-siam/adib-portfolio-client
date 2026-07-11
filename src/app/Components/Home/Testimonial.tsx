@@ -53,11 +53,8 @@ const wordVariants: Variants = {
 
 export default function TestimonialSection() {
   return (
-    <section className="w-full bg-[#efefef] pb-40 px-6 sm:px-12 lg:px-20 text-neutral-950 font-sans antialiased">
-      {/* Top clean layout border layout separating process from testimonials */}
+    <section className="w-full px-6 py-2 sm:px-12 lg:px-20 text-neutral-950 font-sans antialiased">
       <div className="relative max-w-7xl mx-auto ">
-        
-        {/* Asymmetric Responsive Split Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-0 relative">
           
           {/* Visible Center Vertical Divider Line matching image_cadac6.jpg */}
@@ -115,7 +112,7 @@ export default function TestimonialSection() {
           </div>
 
           {/* RIGHT TESTIMONIAL BLOCK (Dropped significantly lower to align perfectly below left side) */}
-          <div className="flex flex-col justify-between md:pl-14 lg:pl-20 pt-12 md:pt-[200px]">
+          <div className="flex flex-col justify-between md:pl-14 lg:pl-20 pt-12 md:pt-32">
             <div className="relative w-full">
               <div className="absolute right-0 top-1 text-neutral-500 text-4xl font-serif font-bold select-none pointer-events-none leading-none">
                 <Quote></Quote>

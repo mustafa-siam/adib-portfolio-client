@@ -98,7 +98,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="bg-[#EBEBEB] text-[#1A1A1A] font-sans min-h-screen w-full py-28 px-6 md:px-12 lg:px-20 overflow-hidden flex flex-col justify-center select-none">
+    <section className="w-full px-6 py-12 sm:py-16 md:px-12 lg:px-20 overflow-hidden text-[#1A1A1A] font-sans select-none">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           variants={containerVariants}
@@ -116,10 +116,10 @@ export default function AboutSection() {
             <span className="font-serif text-lg italic tracking-wide">About</span>
             <span className="h-px w-10 bg-neutral-400/70" />
           </motion.div>
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-neutral-400">
+          <div className="text-center mb-16 md:mb-20">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-[#1A1A1A]">
               Pushing boundaries{' '}
-              <span className="text-[#1A1A1A] font-medium">since 2011</span>
+              <span className=" text-neutral-400 font-medium">since 2011</span>
             </h2>
           </div>
         </motion.div>
@@ -129,7 +129,7 @@ export default function AboutSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-120px" }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
         >
           <div className="lg:col-span-5 w-full flex flex-col items-center lg:items-start">
             <motion.div 
@@ -173,7 +173,7 @@ export default function AboutSection() {
               ))}
             </motion.div>
 
-            <div className="mt-20 lg:mt-28 space-y-0 w-full border-l border-neutral-300 pl-6 md:pl-8">
+            <div className="mt-16 lg:mt-20 space-y-0 w-full border-l border-neutral-400 pl-6 md:pl-8">
               {experienceData.map((item, index) => (
                 <motion.div 
                   key={index} 

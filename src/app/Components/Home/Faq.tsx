@@ -94,7 +94,7 @@ export default function FAQSection() {
   ];
 
   return (
-    <section className="bg-[#EBEBEB] text-[#1A1A1A] font-sans min-h-screen w-full py-28 px-6 md:px-12 lg:px-20 overflow-hidden flex flex-col justify-center select-none">
+    <section className="w-full px-6 pb-12 md:pb-16 md:px-12 lg:px-20 overflow-hidden text-[#1A1A1A] font-sans select-none">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           variants={containerVariants}
@@ -113,7 +113,7 @@ export default function FAQSection() {
             <span className="h-px w-10 bg-neutral-400/70" />
           </motion.div>
           
-          <div className="text-center mb-24">
+          <div className="text-center mb-16 md:mb-20">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-[#1A1A1A]">
               Your Questions, Answered
             </h2>
@@ -185,7 +185,7 @@ export default function FAQSection() {
           </div>
 
           {/* Right Column: Premium Accordion Accorded List */}
-          <div className="lg:col-span-7 w-full flex flex-col h-full pt-2">
+          <div className="lg:col-span-7 w-full flex flex-col h-full">
             <div className="space-y-0 w-full">
               {faqData.map((item, index) => {
                 const isOpen = activeIndex === index;

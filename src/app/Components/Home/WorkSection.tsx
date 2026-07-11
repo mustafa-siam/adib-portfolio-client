@@ -122,10 +122,10 @@ export default function WorkSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="w-full bg-[#efefef] px-4 pb-16 sm:px-10 lg:px-16">
+    <section className="w-full py-2 px-4 sm:px-10 lg:px-16">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[40px] border border-white/10 bg-[#161616] px-4 sm:px-8 h-[800px] sm:h-[1100px] lg:h-[1300px]"
+        className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[40px]  border-white/95 border-8 bg-[#161616] px-4 sm:px-8 h-[800px] sm:h-[1100px] lg:h-[1300px]"
       >
         <div className="grid grid-cols-2 gap-4 sm:gap-6 h-full">
           <div className="relative h-full pt-10">

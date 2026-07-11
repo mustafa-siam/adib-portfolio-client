@@ -11,16 +11,18 @@ import FooterSection from '../Components/Home/Footer'
 
 const page = () => {
   return (
-    <div>
-      <Navbar></Navbar>
-      <Hero></Hero>
-      <WorkSection></WorkSection>
-      <HelloSection></HelloSection>
-      <ProcessSection></ProcessSection>
-      <TestimonialSection></TestimonialSection>
-      <AboutSection></AboutSection>
-      <FAQSection></FAQSection>
-      <FooterSection></FooterSection>
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-background antialiased">
+      <Navbar />
+      <main className="flex flex-col gap-6 sm:gap-10 md:gap-14">
+        <Hero />
+        <WorkSection />
+        <HelloSection />
+        <ProcessSection />
+        <TestimonialSection />
+        <AboutSection />
+        <FAQSection />
+      </main>
+      <FooterSection />
     </div>
   )
 }

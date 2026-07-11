@@ -113,7 +113,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#efefef] min-h-screen pt-32">
+    <section className="relative overflow-hidden w-full pt-28 pb-12 md:pt-40 md:pb-24 bg-transparent flex items-center justify-center">
       <motion.div
         animate={{
           x: [-80, 80, -80],
@@ -124,7 +124,7 @@ export default function Hero() {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute -left-40 -top-40 h-[700px] w-[700px] rounded-full bg-white/80 blur-[140px]"
+        className="absolute -left-40 -top-40 h-[700px] w-[700px] rounded-full bg-white/40 blur-[140px] pointer-events-none"
       />
 
       <motion.div
@@ -137,14 +137,14 @@ export default function Hero() {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute right-[-250px] top-0 h-[700px] w-[700px] rounded-full bg-white/70 blur-[170px]"
+        className="absolute right-[-250px] top-0 h-[700px] w-[700px] rounded-full bg-white/30 blur-[170px] pointer-events-none"
       />
 
       <div
-        className="absolute inset-0 opacity-60"
+        className="absolute inset-0 opacity-40 pointer-events-none"
         style={{
           background:
-            "linear-gradient(120deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,.65) 100%)",
+            "linear-gradient(120deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.3) 100%)",
         }}
       />
 
@@ -152,30 +152,31 @@ export default function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate={startAnimation ? "visible" : "hidden"}
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center"
       >
-        <div className="flex flex-col items-center justify-center text-center">
+        <div className="flex flex-col items-center justify-center text-center w-full">
           <motion.div
             variants={fadeBlur}
-            className="mb-12 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 shadow-[0_15px_40px_rgba(0,0,0,.08)] border border-white"
+            className="mb-8 md:mb-12 inline-flex items-center gap-3 rounded-full bg-white px-4 py-2.5 sm:px-5 sm:py-3 shadow-[0_15px_40px_rgba(0,0,0,.08)] border border-white"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-70 animate-ping" />
               <span className="relative h-2.5 w-2.5 rounded-full bg-green-500" />
             </span>
-            <p className="text-[17px] font-medium tracking-[-.02em] text-neutral-800">
+            <p className="text-sm sm:text-[17px] font-medium tracking-[-.02em] text-neutral-800">
               Booking Open — 2 Spots Left
             </p>
           </motion.div>
 
-          <motion.div
+          <motion.h1
             variants={containerVariants}
-            className="flex flex-col items-center text-center"
+            className="flex flex-col items-center justify-center gap-y-3 md:gap-y-5 w-full select-none"
           >
-            <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5">
+            {/* Row 1: Ultimate [Badge] Saas Animation */}
+            <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 max-w-5xl">
               <AnimatedText
                 text="Ultimate"
-                className="text-5xl sm:text-7xl font-medium tracking-[-0.065em] leading-[0.92] text-[#111]"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
               />
 
               <motion.div
@@ -190,37 +191,20 @@ export default function Hero() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="relative h-[62px] w-[110px] md:h-[82px] md:w-[148px] overflow-hidden rounded-[22px] border border-black/10 shadow-[0_25px_45px_rgba(0,0,0,.28)] bg-neutral-900 origin-center"
+                className="relative h-[44px] w-[78px] sm:h-[58px] sm:w-[105px] md:h-[76px] md:w-[138px] overflow-hidden rounded-[14px] sm:rounded-[22px] border border-black/10 shadow-[0_25px_45px_rgba(0,0,0,.28)] bg-neutral-900 origin-center shrink-0"
               >
                 <motion.div
                   animate={{
                     x: [
-                      "0%",
-                      "0%",
-                      "-12.5%",
-                      "-12.5%",
-                      "-25%",
-                      "-25%",
-                      "-37.5%",
-                      "-37.5%",
-                      "-50%",
-                      "-50%",
-                      "-62.5%",
-                      "-62.5%",
-                      "-75%"
-                    ]
+                      "0%", "0%", "-12.5%", "-12.5%", "-25%", "-25%", "-37.5%", "-37.5%", "-50%", "-50%", "-62.5%", "-62.5%", "-75%"
+                    ],
                   }}
                   transition={{
                     times: [
                       0, 0.13, 0.16, 0.30, 0.33, 0.46, 0.50, 0.63, 0.66, 0.80, 0.83, 0.96, 1.0
                     ],
                     ease: [
-                      "linear", "easeInOut",
-                      "linear", "easeInOut",
-                      "linear", "easeInOut",
-                      "linear", "easeInOut",
-                      "linear", "easeInOut",
-                      "linear", "easeInOut"
+                      "linear", "easeInOut", "linear", "easeInOut", "linear", "easeInOut", "linear", "easeInOut", "linear", "easeInOut", "linear", "easeInOut"
                     ],
                     duration: 15,
                     repeat: Infinity,
@@ -230,7 +214,7 @@ export default function Hero() {
                   {[...capsuleImages, capsuleImages[0]].map((src, idx) => (
                     <div 
                       key={idx} 
-                      className="relative h-full w-[110px] md:w-[148px] shrink-0"
+                      className="relative h-full w-[78px] sm:w-[105px] md:w-[138px] shrink-0"
                     >
                       <Image
                         fill
@@ -246,85 +230,77 @@ export default function Hero() {
 
               <AnimatedText
                 text="Saas Animation"
-                className="text-5xl sm:text-7xl font-medium tracking-[-0.065em] leading-[0.92] text-[#8A8A8A]"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
               />
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5">
+            {/* Row 2: for [Badge] Solid Products */}
+            <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 max-w-5xl">
               <AnimatedText
                 text="for"
-                className="text-5xl sm:text-8xl font-normal tracking-[-0.065em] leading-[0.92] text-[#8A8A8A]"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-normal tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
               />
 
-            <motion.div
-  variants={{
-    hidden: {
-      opacity: 0,
-      scale: 0.7,
-      rotate: 14,
-      y: 40,
-      filter: "blur(18px)",
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotate: 5,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        stiffness: 210,
-        damping: 16,
-      },
-    },
-  }}
-  animate={{
-    y: [0, 6, 0],
-    rotate: [5, 7, 5],
-    scale: [1, 1.015, 1],
-  }}
-  transition={{
-    duration: 5.5,
-    repeat: Infinity,
-    ease: "easeInOut",
-  }}
-  className="relative flex h-[62px] w-[120px] md:h-[82px] md:w-[165px] overflow-hidden rounded-[24px] border border-black bg-[#1d1d1d] shadow-[0_22px_40px_rgba(0,0,0,.42),inset_0_1px_0_rgba(255,255,255,.08)] origin-center"
->
-  <motion.div
-    animate={{
-      x: ["0%", "-25%", "-50%", "-75%"],
-    }}
-    transition={{
-      duration: 8,
-      repeat: Infinity,
-      ease: "easeInOut",
-      times: [0, 0.33, 0.66, 1],
-    }}
-    className="flex h-full w-[400%]"
-  >
-    {["Framer", "Webflow", "Figma", "Framer"].map((item, index) => (
-      <div
-        key={index}
-        className="flex h-full w-[120px] md:w-[165px] shrink-0 items-center justify-center"
-      >
-        <span className="text-[18px] md:text-[24px] font-medium tracking-tight text-[#636363]">
-          {item}
-        </span>
-      </div>
-    ))}
-  </motion.div>
-</motion.div>
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, scale: 0.7, rotate: 14, y: 40, filter: "blur(18px)" },
+                  visible: {
+                    opacity: 1,
+                    scale: 1,
+                    rotate: 5,
+                    y: 0,
+                    filter: "blur(0px)",
+                    transition: { type: "spring", stiffness: 210, damping: 16 },
+                  },
+                }}
+                animate={{
+                  y: [0, 6, 0],
+                  rotate: [5, 7, 5],
+                  scale: [1, 1.015, 1],
+                }}
+                transition={{
+                  duration: 5.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative flex h-[44px] w-[88px] sm:h-[58px] sm:w-[110px] md:h-[76px] md:w-[155px] overflow-hidden rounded-[16px] sm:rounded-[24px] border border-black bg-[#1d1d1d] shadow-[0_22px_40px_rgba(0,0,0,.42),inset_0_1px_0_rgba(255,255,255,.08)] origin-center shrink-0"
+              >
+                <motion.div
+                  animate={{
+                    x: ["0%", "-25%", "-50%", "-75%"],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    times: [0, 0.33, 0.66, 1],
+                  }}
+                  className="flex h-full w-[400%]"
+                >
+                  {["Framer", "Webflow", "Figma", "Framer"].map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex h-full w-[88px] sm:w-[110px] md:w-[155px] shrink-0 items-center justify-center"
+                    >
+                      <span className="text-[13px] sm:text-[18px] md:text-[22px] font-medium tracking-tight text-[#636363]">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+
               <AnimatedText
                 text="Solid"
-                className="text-5xl sm:text-8xl font-medium tracking-[-0.065em] leading-[0.92] text-[#111]"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
               />
 
               <AnimatedText
                 text="Products"
-                className="text-5xl sm:text-8xl sm:mt-0 mt-4 font-medium tracking-[-0.065em] leading-[0.92] text-[#111]"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
               />
             </div>
-          </motion.div>
+          </motion.h1>
 
           <motion.p
             initial={{
@@ -342,7 +318,7 @@ export default function Hero() {
               duration: 0.9,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mt-12 max-w-[620px] text-center text-[18px] leading-[1.7] tracking-[-0.02em] text-[#707070]"
+            className="mt-8 md:mt-12 max-w-[620px] text-center text-base sm:text-[18px] leading-[1.6] sm:leading-[1.7] tracking-[-0.02em] text-[#555] px-2"
           >
             Helping WordPress Plugins and SaaS products to shape their Digital Space.
           </motion.p>
@@ -352,21 +328,21 @@ export default function Hero() {
               hidden: { opacity: 0, y: 30 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
             }}
-            className="flex flex-col sm:flex-row items-center sm:items-end gap-8 md:gap-10 mt-4 md:mt-8 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-10 mt-8 md:mt-10 mb-8 w-full"
           >
-            <a href="#pricing" className="group p-2 bg-white/80 backdrop-blur-md rounded-[3rem] shadow-[0px_8px_24px_rgba(0,0,0,0.06),0px_16px_48px_rgba(0,0,0,0.04)] inline-flex items-center hover:scale-[1.02] active:scale-[0.98] transition-transform">
-              <div className="relative bg-black text-white px-8 md:px-10 py-4 md:py-[1.125rem] rounded-[2.5rem] font-sf font-normal text-xl md:text-[1.35rem] flex items-center gap-3 overflow-hidden">
+            <a href="#pricing" className="group p-1.5 sm:p-2 bg-white/80 backdrop-blur-md rounded-[3rem] shadow-[0px_8px_24px_rgba(0,0,0,0.06),0px_16px_48px_rgba(0,0,0,0.04)] inline-flex items-center hover:scale-[1.02] active:scale-[0.98] transition-transform">
+              <div className="relative bg-black text-white px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 md:py-[1.125rem] rounded-[2.5rem] font-normal text-lg md:text-[1.35rem] flex items-center gap-3 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-white/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 <span className="relative z-10">Contact Me</span> 
-                <div className="relative z-10 w-6 h-6 md:w-6 md:h-6 flex items-center overflow-hidden">
-                  <ArrowRight className="absolute w-6 h-6 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-full" strokeWidth={1.5} />
-                  <ArrowRight className="absolute w-6 h-6 md:w-6 md:h-6 -translate-x-full transition-transform duration-300 group-hover:translate-x-0" strokeWidth={1.5} />
+                <div className="relative z-10 w-5 h-5 md:w-6 md:h-6 flex items-center overflow-hidden">
+                  <ArrowRight className="absolute w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-full" strokeWidth={1.5} />
+                  <ArrowRight className="absolute w-5 h-5 md:w-6 md:h-6 -translate-x-full transition-transform duration-300 group-hover:translate-x-0" strokeWidth={1.5} />
                 </div>
               </div>
             </a>
             
-            <div className="flex flex-col items-center sm:items-start gap-3">
-              <div className="flex -space-x-3">
+            <div className="flex flex-col items-center sm:items-start gap-2 sm:gap-3">
+              <div className="flex -space-x-2.5 sm:flex-row">
                 {[
                   "https://i.pravatar.cc/100?img=11",
                   "https://i.pravatar.cc/100?img=32",
@@ -374,12 +350,12 @@ export default function Hero() {
                   "https://i.pravatar.cc/100?img=12",
                   "https://i.pravatar.cc/100?img=13"
                 ].map((src, i) => (
-                  <div key={i} className="w-9 h-9 rounded-full border-[2px] md:border-[2px] border-white bg-gray-300 overflow-hidden shadow-sm">
+                  <div key={i} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-[2px] border-white bg-gray-300 overflow-hidden shadow-sm shrink-0">
                      <img src={src} className="w-full h-full object-cover" alt="" />
                   </div>
                 ))}
               </div>
-              <div className="text-gray-500 font-sf text-sm font-normal tracking-tight sm:pl-1">
+              <div className="text-gray-600 text-xs sm:text-sm font-normal tracking-tight sm:pl-1">
                 Trusted by founders
               </div>
             </div>
