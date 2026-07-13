@@ -53,9 +53,9 @@ const wordVariants: Variants = {
 
 export default function TestimonialSection() {
   return (
-    <section className="w-full px-6 py-2 sm:px-12 lg:px-20 text-neutral-950 font-sans antialiased">
+    <section className="w-full px-6 pt-8 sm:pt-12 sm:px-12 lg:px-20 text-neutral-950 font-sans antialiased">
       <div className="relative max-w-7xl mx-auto ">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-0 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 relative">
           
           {/* Visible Center Vertical Divider Line matching image_cadac6.jpg */}
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] -translate-x-1/2 bg-gray-400" />
@@ -110,7 +110,7 @@ export default function TestimonialSection() {
               </div>
             </motion.div>
           </div>
-
+            <hr className="mt-6 md:hidden block" />
           {/* RIGHT TESTIMONIAL BLOCK (Dropped significantly lower to align perfectly below left side) */}
           <div className="flex flex-col justify-between md:pl-14 lg:pl-20 pt-12 md:pt-32">
             <div className="relative w-full">

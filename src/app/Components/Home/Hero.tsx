@@ -1,56 +1,55 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import { motion, Variants } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import ImageCarousel from "../ui/Imagecarusol";
+import LogoCarousel from "../ui/Logocarusol";
 
-const AnimatedText = ({
+// True 3D word reveal — rotates up from below (rotateX) with real perspective depth.
+const AnimatedWord = ({
   text,
   className = "",
+  active,
+  delay = 0,
 }: {
   text: string;
   className?: string;
+  active: boolean;
+  delay?: number;
 }) => {
   return (
-    <span className={`inline-flex ${className}`}>
-      {text.split("").map((letter, index) => (
-        <motion.span
-          key={index}
-          initial={{
-            opacity: 0,
-            y: 55,
-            scale: 0.9,
-            filter: "blur(14px)",
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            filter: "blur(0px)",
-          }}
-          transition={{
-            duration: 0.75,
-            delay: index * 0.03,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="inline-block"
-        >
-          {letter === " " ? "\u00A0" : letter}
-        </motion.span>
-      ))}
+    <span
+      style={{ perspective: "800px", display: "inline-block" }}
+      className="overflow-hidden"
+    >
+      <motion.span
+        initial={{ opacity: 0, rotateX: 90, y: 40 }}
+        animate={
+          active
+            ? { opacity: 1, rotateX: 0, y: 0 }
+            : { opacity: 0, rotateX: 90, y: 40 }
+        }
+        transition={{
+          duration: 0.6,
+          delay: active ? delay : 0,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        style={{
+          transformOrigin: "bottom center",
+          transformStyle: "preserve-3d",
+          willChange: "transform, opacity",
+        }}
+        className={`inline-block ${className}`}
+      >
+        {text}
+      </motion.span>
     </span>
   );
 };
 
 export default function Hero() {
   const [startAnimation, setStartAnimation] = useState(false);
-
-  const capsuleImages = [
-    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
-    "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=600&q=80",
-    "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=600&q=80",
-  ];
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -60,60 +59,27 @@ export default function Hero() {
     });
   }, []);
 
-  const containerVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.14,
-        delayChildren: 0.15,
-      },
-    },
-  };
+  // ---- Sequenced timeline ----
+  const IMAGE_CAROUSEL_DELAY = 0.1;
+  const LOGO_CAROUSEL_DELAY = 0.15;
 
-  const fadeBlur: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-      scale: 0.97,
-      filter: "blur(16px)",
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        stiffness: 160,
-        damping: 20,
-      },
-    },
-  };
+  const WORD_GAP = 0.45;
+  const WORDS_START = 1.0;
 
-  const badgeVariant: Variants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.7,
-      rotate: -14,
-      y: 40,
-      filter: "blur(18px)",
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotate: -5,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        stiffness: 210,
-        damping: 16,
-      },
-    },
-  };
+  const ULTIMATE_DELAY = WORDS_START + WORD_GAP * 0; 
+  const SAAS_DELAY = WORDS_START + WORD_GAP * 1; 
+  const ANIMATION_DELAY = WORDS_START + WORD_GAP * 2; 
+  const FOR_DELAY = WORDS_START + WORD_GAP * 3; 
+  const SOLID_DELAY = WORDS_START + WORD_GAP * 4; 
+  const PRODUCTS_DELAY = WORDS_START + WORD_GAP * 5; 
+
+  const PILL_DELAY = PRODUCTS_DELAY + 0.6; 
+  const SUBTITLE_DELAY = PRODUCTS_DELAY + 0.8; 
+  const BUTTONS_DELAY = PRODUCTS_DELAY + 1.0; 
 
   return (
-    <section className="relative overflow-hidden w-full pt-28 pb-12 md:pt-40 md:pb-24 bg-transparent flex items-center justify-center">
+    <section className="relative overflow-hidden w-full pt-28  md:pt-40 flex items-center justify-center">
+      {/* Background Gradients */}
       <motion.div
         animate={{
           x: [-80, 80, -80],
@@ -124,7 +90,7 @@ export default function Hero() {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute -left-40 -top-40 h-[700px] w-[700px] rounded-full bg-white/40 blur-[140px] pointer-events-none"
+        className="absolute -left-40 -top-40 h-[700px] w-[700px] rounded-full pointer-events-none"
       />
 
       <motion.div
@@ -137,27 +103,26 @@ export default function Hero() {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute right-[-250px] top-0 h-[700px] w-[700px] rounded-full bg-white/30 blur-[170px] pointer-events-none"
+        className="absolute right-[-250px] top-0 h-[700px] w-[700px] rounded-full pointer-events-none"
       />
 
       <div
         className="absolute inset-0 opacity-40 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(120deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.3) 100%)",
-        }}
       />
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={startAnimation ? "visible" : "hidden"}
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center"
-      >
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center text-center w-full">
+          
+          {/* Top pill */}
           <motion.div
-            variants={fadeBlur}
-            className="mb-8 md:mb-12 inline-flex items-center gap-3 rounded-full bg-white px-4 py-2.5 sm:px-5 sm:py-3 shadow-[0_15px_40px_rgba(0,0,0,.08)] border border-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{
+              duration: 0.5,
+              delay: startAnimation ? PILL_DELAY : 0,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mb-8 md:mb-12 inline-flex items-center gap-3 rounded-full bg-white px-4 py-2.5 sm:px-5 sm:py-3 shadow-[0_15px_40px_rgba(0,0,0,.08)] border border-neutral-200/50"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-70 animate-ping" />
@@ -168,181 +133,154 @@ export default function Hero() {
             </p>
           </motion.div>
 
-          <motion.h1
-            variants={containerVariants}
-            className="flex flex-col items-center justify-center gap-y-3 md:gap-y-5 w-full select-none"
-          >
-            {/* Row 1: Ultimate [Badge] Saas Animation */}
-            <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 max-w-5xl">
-              <AnimatedText
+          {/* Heading Section */}
+          <h1 className="flex flex-col items-center justify-center gap-y-3 md:gap-y-5 w-full select-none text-center">
+            
+            {/* --- MOBILE ONLY VIEWS --- */}
+            
+            {/* Mobile Line 1: Ultimate Saas [Image Carousel] */}
+            <div className="flex md:hidden flex-row flex-wrap items-center justify-center gap-x-2 w-full px-2">
+              <AnimatedWord
                 text="Ultimate"
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+                active={startAnimation}
+                delay={ULTIMATE_DELAY}
+                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
               />
-
-              <motion.div
-                variants={badgeVariant}
-                animate={{
-                  y: [0, -6, 0],
-                  rotate: [-4, -6, -4],
-                  scale: [1, 1.015, 1],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="relative h-[44px] w-[78px] sm:h-[58px] sm:w-[105px] md:h-[76px] md:w-[138px] overflow-hidden rounded-[14px] sm:rounded-[22px] border border-black/10 shadow-[0_25px_45px_rgba(0,0,0,.28)] bg-neutral-900 origin-center shrink-0"
-              >
-                <motion.div
-                  animate={{
-                    x: [
-                      "0%", "0%", "-12.5%", "-12.5%", "-25%", "-25%", "-37.5%", "-37.5%", "-50%", "-50%", "-62.5%", "-62.5%", "-75%"
-                    ],
-                  }}
-                  transition={{
-                    times: [
-                      0, 0.13, 0.16, 0.30, 0.33, 0.46, 0.50, 0.63, 0.66, 0.80, 0.83, 0.96, 1.0
-                    ],
-                    ease: [
-                      "linear", "easeInOut", "linear", "easeInOut", "linear", "easeInOut", "linear", "easeInOut", "linear", "easeInOut", "linear", "easeInOut"
-                    ],
-                    duration: 15,
-                    repeat: Infinity,
-                  }}
-                  className="flex h-full w-[400%]"
-                >
-                  {[...capsuleImages, capsuleImages[0]].map((src, idx) => (
-                    <div 
-                      key={idx} 
-                      className="relative h-full w-[78px] sm:w-[105px] md:w-[138px] shrink-0"
-                    >
-                      <Image
-                        fill
-                        unoptimized
-                        src={src}
-                        alt="Carousel presentation"
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
-                </motion.div>
-              </motion.div>
-
-              <AnimatedText
-                text="Saas Animation"
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
+              <AnimatedWord
+                text="Saas"
+                active={startAnimation}
+                delay={SAAS_DELAY}
+                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
               />
+              <div className="inline-flex items-center align-middle ml-1">
+                <ImageCarousel active={startAnimation} startDelay={IMAGE_CAROUSEL_DELAY} />
+              </div>
             </div>
 
-            {/* Row 2: for [Badge] Solid Products */}
-            <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 max-w-5xl">
-              <AnimatedText
+            {/* Mobile Line 2: Animation for [Logo Carousel] */}
+            <div className="flex md:hidden flex-row flex-wrap items-center justify-center gap-x-2 w-full px-2">
+              <AnimatedWord
+                text="Animation"
+                active={startAnimation}
+                delay={ANIMATION_DELAY}
+                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#8A8A8A]"
+              />
+              <AnimatedWord
                 text="for"
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-normal tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
+                active={startAnimation}
+                delay={FOR_DELAY}
+                className="text-4xl font-normal tracking-[-0.05em] leading-[1.1] text-[#8A8A8A]"
               />
+              <div className="inline-flex items-center align-middle ml-1">
+                <LogoCarousel active={startAnimation} startDelay={LOGO_CAROUSEL_DELAY} />
+              </div>
+            </div>
 
-              <motion.div
-                variants={{
-                  hidden: { opacity: 0, scale: 0.7, rotate: 14, y: 40, filter: "blur(18px)" },
-                  visible: {
-                    opacity: 1,
-                    scale: 1,
-                    rotate: 5,
-                    y: 0,
-                    filter: "blur(0px)",
-                    transition: { type: "spring", stiffness: 210, damping: 16 },
-                  },
-                }}
-                animate={{
-                  y: [0, 6, 0],
-                  rotate: [5, 7, 5],
-                  scale: [1, 1.015, 1],
-                }}
-                transition={{
-                  duration: 5.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="relative flex h-[44px] w-[88px] sm:h-[58px] sm:w-[110px] md:h-[76px] md:w-[155px] overflow-hidden rounded-[16px] sm:rounded-[24px] border border-black bg-[#1d1d1d] shadow-[0_22px_40px_rgba(0,0,0,.42),inset_0_1px_0_rgba(255,255,255,.08)] origin-center shrink-0"
-              >
-                <motion.div
-                  animate={{
-                    x: ["0%", "-25%", "-50%", "-75%"],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    times: [0, 0.33, 0.66, 1],
-                  }}
-                  className="flex h-full w-[400%]"
-                >
-                  {["Framer", "Webflow", "Figma", "Framer"].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex h-full w-[88px] sm:w-[110px] md:w-[155px] shrink-0 items-center justify-center"
-                    >
-                      <span className="text-[13px] sm:text-[18px] md:text-[22px] font-medium tracking-tight text-[#636363]">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
-                </motion.div>
-              </motion.div>
-
-              <AnimatedText
+            {/* Mobile Line 3: Solid Products */}
+            <div className="flex md:hidden flex-row flex-wrap items-center justify-center gap-x-2 w-full px-2">
+              <AnimatedWord
                 text="Solid"
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+                active={startAnimation}
+                delay={SOLID_DELAY}
+                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
               />
-
-              <AnimatedText
+              <AnimatedWord
                 text="Products"
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+                active={startAnimation}
+                delay={PRODUCTS_DELAY}
+                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
               />
             </div>
-          </motion.h1>
 
+            {/* --- DESKTOP ONLY VIEWS (Your original exact flow) --- */}
+            
+            {/* Desktop Row 1 */}
+            <div className="hidden md:flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 max-w-5xl">
+              <AnimatedWord
+                text="Ultimate"
+                active={startAnimation}
+                delay={ULTIMATE_DELAY}
+                className="sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+              />
+              <AnimatedWord
+                text="Saas"
+                active={startAnimation}
+                delay={SAAS_DELAY}
+                className="pr-1 sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+              />
+              <ImageCarousel active={startAnimation} startDelay={IMAGE_CAROUSEL_DELAY} />
+              <AnimatedWord
+                text="Animation"
+                active={startAnimation}
+                delay={ANIMATION_DELAY}
+                className="sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
+              />
+            </div>
+
+            {/* Desktop Row 2 */}
+            <div className="hidden md:flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 max-w-5xl">
+              <AnimatedWord
+                text="for"
+                active={startAnimation}
+                delay={FOR_DELAY}
+                className="sm:text-6xl md:text-7xl lg:text-[85px] font-normal tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
+              />
+              <LogoCarousel active={startAnimation} startDelay={LOGO_CAROUSEL_DELAY} />
+              <AnimatedWord
+                text="Solid"
+                active={startAnimation}
+                delay={SOLID_DELAY}
+                className="sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+              />
+              <AnimatedWord
+                text="Products"
+                active={startAnimation}
+                delay={PRODUCTS_DELAY}
+                className="sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+              />
+            </div>
+          </h1>
+
+          {/* Subtitle */}
           <motion.p
-            initial={{
-              opacity: 0,
-              y: 35,
-              filter: "blur(14px)",
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              filter: "blur(0px)",
-            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{
-              delay: 0.9,
-              duration: 0.9,
+              delay: startAnimation ? SUBTITLE_DELAY : 0,
+              duration: 0.6,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mt-8 md:mt-12 max-w-[620px] text-center text-base sm:text-[18px] leading-[1.6] sm:leading-[1.7] tracking-[-0.02em] text-[#555] px-2"
+            className="mt-8 md:mt-12 max-w-[620px] text-center text-base sm:text-[18px] leading-[1.6] sm:leading-[1.7] tracking-[-0.02em] text-[#555] px-4"
           >
             Helping WordPress Plugins and SaaS products to shape their Digital Space.
           </motion.p>
 
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+          {/* Call To Actions Container */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+              delay: startAnimation ? BUTTONS_DELAY : 0,
             }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-10 mt-8 md:mt-10 mb-8 w-full"
+            className="flex flex-row flex-wrap md:flex-nowrap items-center justify-center gap-4 sm:gap-8 md:gap-10 mt-8 md:mt-10 mb-8 w-full px-2"
           >
-            <a href="#pricing" className="group p-1.5 sm:p-2 bg-white/80 backdrop-blur-md rounded-[3rem] shadow-[0px_8px_24px_rgba(0,0,0,0.06),0px_16px_48px_rgba(0,0,0,0.04)] inline-flex items-center hover:scale-[1.02] active:scale-[0.98] transition-transform">
-              <div className="relative bg-black text-white px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 md:py-[1.125rem] rounded-[2.5rem] font-normal text-lg md:text-[1.35rem] flex items-center gap-3 overflow-hidden">
+            {/* Contact Button */}
+            <a href="#pricing" className="group p-1 bg-white/80 backdrop-blur-md rounded-[3rem] shadow-[0px_8px_24px_rgba(0,0,0,0.06)] inline-flex items-center hover:scale-[1.02] active:scale-[0.98] transition-transform border border-neutral-200/40 shrink-0">
+              <div className="relative bg-black text-white px-4 sm:px-8 py-2.5 sm:py-4 rounded-[2.5rem] font-normal text-sm sm:text-base md:text-[1.35rem] flex items-center gap-2 sm:gap-3 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-white/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                <span className="relative z-10">Contact Me</span> 
-                <div className="relative z-10 w-5 h-5 md:w-6 md:h-6 flex items-center overflow-hidden">
-                  <ArrowRight className="absolute w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-full" strokeWidth={1.5} />
-                  <ArrowRight className="absolute w-5 h-5 md:w-6 md:h-6 -translate-x-full transition-transform duration-300 group-hover:translate-x-0" strokeWidth={1.5} />
+                <span className="relative z-10 whitespace-nowrap">Contact Me</span>
+                <div className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex items-center overflow-hidden">
+                  <ArrowRight className="absolute w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-full" strokeWidth={1.5} />
+                  <ArrowRight className="absolute w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 -translate-x-full transition-transform duration-300 group-hover:translate-x-0" strokeWidth={1.5} />
                 </div>
               </div>
             </a>
-            
-            <div className="flex flex-col items-center sm:items-start gap-2 sm:gap-3">
-              <div className="flex -space-x-2.5 sm:flex-row">
+
+            {/* Social Proof / Avatars */}
+            <div className="flex flex-col items-center sm:items-start justify-center gap-1 shrink-0">
+              <div className="flex -space-x-2 items-center justify-center">
                 {[
                   "https://i.pravatar.cc/100?img=11",
                   "https://i.pravatar.cc/100?img=32",
@@ -350,19 +288,19 @@ export default function Hero() {
                   "https://i.pravatar.cc/100?img=12",
                   "https://i.pravatar.cc/100?img=13"
                 ].map((src, i) => (
-                  <div key={i} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-[2px] border-white bg-gray-300 overflow-hidden shadow-sm shrink-0">
-                     <img src={src} className="w-full h-full object-cover" alt="" />
+                  <div key={i} className="w-7 h-7 sm:w-9 sm:h-9 rounded-full border-[2px] border-white bg-neutral-200 overflow-hidden shadow-sm shrink-0">
+                     <img src={src} className="w-full h-full object-cover" alt="avatar" />
                   </div>
                 ))}
               </div>
-              <div className="text-gray-600 text-xs sm:text-sm font-normal tracking-tight sm:pl-1">
+              <div className="text-neutral-600 text-[11px] sm:text-sm font-normal tracking-tight pl-0.5">
                 Trusted by founders
               </div>
             </div>
-          </motion.div>
 
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

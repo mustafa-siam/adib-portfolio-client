@@ -2,13 +2,14 @@
 import { motion, Variants } from 'motion/react';
 
 export default function AboutSection() {
+  // Added a 1-second baseline delay before children stagger in
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.08,
-        delayChildren: 0.1,
+        delayChildren: 1.0, 
       },
     },
   } as const;
@@ -32,7 +33,7 @@ export default function AboutSection() {
     },
   };
 
-  // The image animates from a straight upward movement into its signature curved tilt as it enters the viewport
+  // Adjusted the image card to wait for the 1-second viewport delay window
   const imageCardVariants = {
     hidden: { 
       opacity: 0, 
@@ -49,7 +50,8 @@ export default function AboutSection() {
         type: 'spring', 
         stiffness: 45, 
         damping: 18,
-        mass: 1.2
+        mass: 1.2,
+        delay: 0.5
       } 
     }
   } as const;
@@ -65,12 +67,14 @@ export default function AboutSection() {
   const descriptionText = "Joris van Dijk is a Dutch designer known for his minimalist, expressive digital work. He helps startups and studios create clean interfaces and strong branding. Based in Utrecht, he blends function with emotion — and often spends his free time cycling or exploring generative art.";
   const words = descriptionText.split(" ");
 
+  // Cascaded the 1-second delay down to the split text layout engine
   const textContainerVariants = {
     hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.03,
+        delayChildren: 0.4,
       },
     },
   } as const;

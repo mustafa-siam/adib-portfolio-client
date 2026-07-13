@@ -63,24 +63,50 @@ const pills: Pill[] = [
 
 const mobilePills: Pill[] = [pills[0], pills[3], pills[1], pills[4], pills[2], pills[5]];
 
+// Added a 1-second delay before orchestrating children inside the container
 const containerVariants: Variants = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
+    transition: { staggerChildren: 0.08, delayChildren: 1.0 },
   },
 };
 
-const pillVariants: Variants = {
+// Premium variant builder with directional fly-ins, initial blur effect, and 1s base delay
+const pillVariants = (side: "left" | "right"): Variants => ({
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    y: -180,
+    x: side === "left" ? -250 : 250,
+    rotate: side === "left" ? -8 : 8,
+    filter: "blur(8px)",
+  },
+  show: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+    y: 0,
+    rotate: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 1.8, 
+      ease: [0.22, 1, 0.36, 1],
+      delay: 1.0 // Adds 1-second delay when triggered on mobile layout elements directly
+    },
+  },
+});
+
+const fallbackPillVariants: Variants = {
   hidden: { opacity: 0, scale: 0.75, y: 14 },
   show: {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 220, damping: 20 },
+    transition: { type: "spring", stiffness: 220, damping: 20, delay: 0.2 },
   },
 };
 
-const headlineSegments: { text: string; className: string }[] = [
+const headlineSegments = [
   { text: "We help startups and enterprise to establish an", className: "text-neutral-900" },
   { text: "emotional connection", className: "text-neutral-500" },
   { text: "between their products and", className: "text-neutral-900" },
@@ -93,7 +119,7 @@ const headlineWords = headlineSegments.flatMap((segment) =>
 
 function PillItem({ pill }: { pill: Pill }) {
   return (
-    <div className="flex items-center gap-2 rounded-full bg-white pl-2 pr-4 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.14)]">
+    <div className="flex items-center gap-2 rounded-full bg-white pl-2 pr-4 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.14)] border border-neutral-200/20">
       <span className={`flex h-8 w-8 items-center justify-center rounded-full text-white ${pill.iconBg}`}>
         {pill.icon}
       </span>
@@ -123,15 +149,16 @@ const wordVariants: Variants = {
 
 export default function HelloSection() {
   return (
-    <section className="relative flex w-full justify-center overflow-hidden px-6 py-12 sm:py-16">
+    <section className="relative flex w-full justify-center overflow-hidden px-6 py-8 sm:py-12 ">
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate="show"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
         className="relative mx-auto w-full max-w-3xl text-center"
       >
         <motion.div
-          variants={pillVariants}
+          variants={fallbackPillVariants}
           className="mb-4 flex items-center justify-center gap-4 text-neutral-500 sm:mb-6"
         >
           <span className="h-px w-10 bg-neutral-400/40" />
@@ -141,9 +168,6 @@ export default function HelloSection() {
 
         <motion.h1
           variants={headlineContainerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.5 }}
           className="text-balance text-2xl font-medium leading-snug sm:text-4xl md:text-[2.75rem]"
         >
           {headlineWords.map((item, i) => (
@@ -158,10 +182,11 @@ export default function HelloSection() {
           ))}
         </motion.h1>
 
+        {/* Desktop pill layout with premium fly-in vectors */}
         {pills.map((pill) => (
           <motion.div
             key={pill.label}
-            variants={pillVariants}
+            variants={pillVariants(pill.side)}
             className="absolute hidden sm:block"
             style={{ top: pill.top, [pill.side]: pill.offset } as React.CSSProperties}
           >
@@ -172,7 +197,7 @@ export default function HelloSection() {
                 duration: pill.float,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: pill.delay,
+                delay: pill.delay + 1.0, // Floating delays adjusted to begin perfectly post fly-in
               }}
             >
               <span className={`flex h-7 w-7 items-center justify-center rounded-full text-white ${pill.iconBg}`}>
@@ -183,45 +208,49 @@ export default function HelloSection() {
           </motion.div>
         ))}
 
+        {/* Mobile premium fly-in pill grid */}
         <motion.div
           variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
           className="relative mt-10 h-[220px] sm:hidden"
         >
-          <motion.div variants={pillVariants} className="absolute left-0 top-0">
-            <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}>
+          {/* Design Systems - Left Side */}
+          <motion.div variants={pillVariants("left")} className="absolute left-0 top-0">
+            <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.0 }}>
               <PillItem pill={mobilePills[0]} />
             </motion.div>
           </motion.div>
 
-          <motion.div variants={pillVariants} className="absolute right-0 top-3">
-            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}>
+          {/* Animation - Right Side */}
+          <motion.div variants={pillVariants("right")} className="absolute right-0 top-3">
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}>
               <PillItem pill={mobilePills[1]} />
             </motion.div>
           </motion.div>
 
-          <motion.div variants={pillVariants} className="absolute left-12 top-[76px]">
-            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 4.7, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}>
+          {/* UI/UX - Left Side */}
+          <motion.div variants={pillVariants("left")} className="absolute left-12 top-[76px]">
+            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 4.7, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}>
               <PillItem pill={mobilePills[2]} />
             </motion.div>
           </motion.div>
 
-          <motion.div variants={pillVariants} className="absolute right-6 top-[92px]">
-            <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}>
+          {/* Prototyping - Right Side */}
+          <motion.div variants={pillVariants("right")} className="absolute right-6 top-[92px]">
+            <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}>
               <PillItem pill={mobilePills[3]} />
             </motion.div>
           </motion.div>
 
-          <motion.div variants={pillVariants} className="absolute left-2 bottom-0">
-            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4.9, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}>
+          {/* Research - Left Side */}
+          <motion.div variants={pillVariants("left")} className="absolute left-2 bottom-0">
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4.9, repeat: Infinity, ease: "easeInOut", delay: 1.1 }}>
               <PillItem pill={mobilePills[4]} />
             </motion.div>
           </motion.div>
 
-          <motion.div variants={pillVariants} className="absolute right-1 bottom-2">
-            <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}>
+          {/* Strategy - Right Side */}
+          <motion.div variants={pillVariants("right")} className="absolute right-1 bottom-2">
+            <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}>
               <PillItem pill={mobilePills[5]} />
             </motion.div>
           </motion.div>
