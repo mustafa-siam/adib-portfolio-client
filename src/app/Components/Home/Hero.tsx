@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import ImageCarousel from "../ui/Imagecarusol";
-import LogoCarousel from "../ui/Logocarusol";
+import ImageCarousel from "../common/Imagecarusol";
+import LogoCarousel from "../common/Logocarusol";
 
 // True 3D word reveal — rotates up from below (rotateX) with real perspective depth.
 const AnimatedWord = ({
@@ -31,9 +31,9 @@ const AnimatedWord = ({
             : { opacity: 0, rotateX: 90, y: 40 }
         }
         transition={{
-          duration: 0.6,
+          duration: 0.45,
           delay: active ? delay : 0,
-          ease: [0.22, 1, 0.36, 1],
+          ease: [0.25, 1, 0.5, 1],
         }}
         style={{
           transformOrigin: "bottom center",
@@ -55,16 +55,16 @@ export default function Hero() {
     requestAnimationFrame(() => {
       setTimeout(() => {
         setStartAnimation(true);
-      }, 180);
+      }, 60);
     });
   }, []);
 
-  // ---- Sequenced timeline ----
-  const IMAGE_CAROUSEL_DELAY = 0.1;
-  const LOGO_CAROUSEL_DELAY = 0.15;
+  // ---- Accelerated timeline adjustments ----
+  const IMAGE_CAROUSEL_DELAY = 0.05;
+  const LOGO_CAROUSEL_DELAY = 0.08;
 
-  const WORD_GAP = 0.45;
-  const WORDS_START = 1.0;
+  const WORD_GAP = 0.15;
+  const WORDS_START = 0.2;
 
   const ULTIMATE_DELAY = WORDS_START + WORD_GAP * 0; 
   const SAAS_DELAY = WORDS_START + WORD_GAP * 1; 
@@ -73,12 +73,12 @@ export default function Hero() {
   const SOLID_DELAY = WORDS_START + WORD_GAP * 4; 
   const PRODUCTS_DELAY = WORDS_START + WORD_GAP * 5; 
 
-  const PILL_DELAY = PRODUCTS_DELAY + 0.6; 
-  const SUBTITLE_DELAY = PRODUCTS_DELAY + 0.8; 
-  const BUTTONS_DELAY = PRODUCTS_DELAY + 1.0; 
+  const PILL_DELAY = WORDS_START; 
+  const SUBTITLE_DELAY = PRODUCTS_DELAY + 0.25; 
+  const BUTTONS_DELAY = PRODUCTS_DELAY + 0.35; 
 
   return (
-    <section className="relative overflow-hidden w-full pt-28  md:pt-40 flex items-center justify-center">
+    <section className="relative overflow-hidden w-full pt-28 md:pt-40 flex items-center justify-center">
       {/* Background Gradients */}
       <motion.div
         animate={{
@@ -106,21 +106,19 @@ export default function Hero() {
         className="absolute right-[-250px] top-0 h-[700px] w-[700px] rounded-full pointer-events-none"
       />
 
-      <div
-        className="absolute inset-0 opacity-40 pointer-events-none"
-      />
+      <div className="absolute inset-0 opacity-40 pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center text-center w-full">
           
           {/* Top pill */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{
-              duration: 0.5,
+              duration: 0.4,
               delay: startAnimation ? PILL_DELAY : 0,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [0.25, 1, 0.5, 1],
             }}
             className="mb-8 md:mb-12 inline-flex items-center gap-3 rounded-full bg-white px-4 py-2.5 sm:px-5 sm:py-3 shadow-[0_15px_40px_rgba(0,0,0,.08)] border border-neutral-200/50"
           >
@@ -134,121 +132,123 @@ export default function Hero() {
           </motion.div>
 
           {/* Heading Section */}
-          <h1 className="flex flex-col items-center justify-center gap-y-3 md:gap-y-5 w-full select-none text-center">
+          <h1 className="flex flex-col items-center justify-center gap-y-3 md:gap-y-6 w-full select-none text-center">
             
             {/* --- MOBILE ONLY VIEWS --- */}
-            
-            {/* Mobile Line 1: Ultimate Saas [Image Carousel] */}
-            <div className="flex md:hidden flex-row flex-wrap items-center justify-center gap-x-2 w-full px-2">
+            {/* Mobile Line 1 */}
+            <div className="flex md:hidden flex-row flex-nowrap items-center justify-center gap-x-1.5 w-full px-2">
               <AnimatedWord
                 text="Ultimate"
                 active={startAnimation}
                 delay={ULTIMATE_DELAY}
-                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
+                className="text-3xl sm:text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
               />
               <AnimatedWord
                 text="Saas"
                 active={startAnimation}
                 delay={SAAS_DELAY}
-                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
+                className="text-3xl sm:text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
               />
-              <div className="inline-flex items-center align-middle ml-1">
+              <div className="inline-flex items-center align-middle ml-0.5 shrink-0">
                 <ImageCarousel active={startAnimation} startDelay={IMAGE_CAROUSEL_DELAY} />
               </div>
             </div>
 
-            {/* Mobile Line 2: Animation for [Logo Carousel] */}
-            <div className="flex md:hidden flex-row flex-wrap items-center justify-center gap-x-2 w-full px-2">
+            {/* Mobile Line 2 */}
+            <div className="flex md:hidden flex-row flex-nowrap items-center justify-center gap-x-1.5 w-full px-2">
               <AnimatedWord
                 text="Animation"
                 active={startAnimation}
                 delay={ANIMATION_DELAY}
-                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#8A8A8A]"
+                className="text-3xl sm:text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#8A8A8A]"
               />
               <AnimatedWord
                 text="for"
                 active={startAnimation}
                 delay={FOR_DELAY}
-                className="text-4xl font-normal tracking-[-0.05em] leading-[1.1] text-[#8A8A8A]"
+                className="text-3xl sm:text-4xl font-normal tracking-[-0.05em] leading-[1.1] text-[#8A8A8A]"
               />
-              <div className="inline-flex items-center align-middle ml-1">
+              <div className="inline-flex items-center align-middle ml-0.5 shrink-0 mt-2">
                 <LogoCarousel active={startAnimation} startDelay={LOGO_CAROUSEL_DELAY} />
               </div>
             </div>
 
-            {/* Mobile Line 3: Solid Products */}
-            <div className="flex md:hidden flex-row flex-wrap items-center justify-center gap-x-2 w-full px-2">
+            {/* Mobile Line 3 */}
+            <div className="flex md:hidden flex-row flex-nowrap items-center justify-center gap-x-1.5 w-full px-2">
               <AnimatedWord
                 text="Solid"
                 active={startAnimation}
                 delay={SOLID_DELAY}
-                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
+                className="text-3xl sm:text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
               />
               <AnimatedWord
                 text="Products"
                 active={startAnimation}
                 delay={PRODUCTS_DELAY}
-                className="text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
+                className="text-3xl sm:text-4xl font-medium tracking-[-0.05em] leading-[1.1] text-[#111]"
               />
             </div>
 
-            {/* --- DESKTOP ONLY VIEWS (Your original exact flow) --- */}
-            
+            {/* --- DESKTOP TWO-LINE VIEW --- */}
             {/* Desktop Row 1 */}
-            <div className="hidden md:flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 max-w-5xl">
+            <div className="hidden md:flex flex-row items-center justify-center gap-x-3 lg:gap-x-4 max-w-5xl">
               <AnimatedWord
                 text="Ultimate"
                 active={startAnimation}
                 delay={ULTIMATE_DELAY}
-                className="sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+                className="text-5xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
               />
               <AnimatedWord
                 text="Saas"
                 active={startAnimation}
                 delay={SAAS_DELAY}
-                className="pr-1 sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+                className="text-5xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
               />
-              <ImageCarousel active={startAnimation} startDelay={IMAGE_CAROUSEL_DELAY} />
+              <div className="inline-flex items-center align-middle shrink-0 mx-1">
+                <ImageCarousel active={startAnimation} startDelay={IMAGE_CAROUSEL_DELAY} />
+              </div>
               <AnimatedWord
                 text="Animation"
                 active={startAnimation}
                 delay={ANIMATION_DELAY}
-                className="sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
+                className="text-5xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
               />
             </div>
 
             {/* Desktop Row 2 */}
-            <div className="hidden md:flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 max-w-5xl">
+            <div className="hidden md:flex flex-row items-center justify-center gap-x-3 lg:gap-x-4 max-w-5xl">
               <AnimatedWord
                 text="for"
                 active={startAnimation}
                 delay={FOR_DELAY}
-                className="sm:text-6xl md:text-7xl lg:text-[85px] font-normal tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
+                className="text-5xl md:text-7xl lg:text-[85px] font-normal tracking-[-0.05em] leading-[0.95] text-[#8A8A8A]"
               />
-              <LogoCarousel active={startAnimation} startDelay={LOGO_CAROUSEL_DELAY} />
+              <div className="inline-flex items-center align-middle shrink-0 mx-1">
+                <LogoCarousel active={startAnimation} startDelay={LOGO_CAROUSEL_DELAY} />
+              </div>
               <AnimatedWord
                 text="Solid"
                 active={startAnimation}
                 delay={SOLID_DELAY}
-                className="sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+                className="text-5xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
               />
               <AnimatedWord
                 text="Products"
                 active={startAnimation}
                 delay={PRODUCTS_DELAY}
-                className="sm:text-6xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
+                className="text-5xl md:text-7xl lg:text-[85px] font-medium tracking-[-0.05em] leading-[0.95] text-[#111]"
               />
             </div>
           </h1>
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{
               delay: startAnimation ? SUBTITLE_DELAY : 0,
-              duration: 0.6,
-              ease: [0.22, 1, 0.36, 1],
+              duration: 0.5,
+              ease: [0.25, 1, 0.5, 1],
             }}
             className="mt-8 md:mt-12 max-w-[620px] text-center text-base sm:text-[18px] leading-[1.6] sm:leading-[1.7] tracking-[-0.02em] text-[#555] px-4"
           >
@@ -257,18 +257,18 @@ export default function Hero() {
 
           {/* Call To Actions Container */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={startAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{
-              duration: 0.6,
-              ease: [0.22, 1, 0.36, 1],
+              duration: 0.5,
+              ease: [0.25, 1, 0.5, 1],
               delay: startAnimation ? BUTTONS_DELAY : 0,
             }}
             className="flex flex-row flex-wrap md:flex-nowrap items-center justify-center gap-4 sm:gap-8 md:gap-10 mt-8 md:mt-10 mb-8 w-full px-2"
           >
             {/* Contact Button */}
             <a href="#pricing" className="group p-1 bg-white/80 backdrop-blur-md rounded-[3rem] shadow-[0px_8px_24px_rgba(0,0,0,0.06)] inline-flex items-center hover:scale-[1.02] active:scale-[0.98] transition-transform border border-neutral-200/40 shrink-0">
-              <div className="relative bg-black text-white px-4 sm:px-8 py-2.5 sm:py-4 rounded-[2.5rem] font-normal text-sm sm:text-base md:text-[1.35rem] flex items-center gap-2 sm:gap-3 overflow-hidden">
+              <div className="relative bg-black text-white px-4 sm:px-8 py-2.5  rounded-[2.5rem] font-normal text-sm sm:text-base md:text-xl flex items-center gap-2 sm:gap-3 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-white/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 <span className="relative z-10 whitespace-nowrap">Contact Me</span>
                 <div className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex items-center overflow-hidden">

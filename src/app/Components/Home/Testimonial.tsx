@@ -53,7 +53,7 @@ const wordVariants: Variants = {
 
 export default function TestimonialSection() {
   return (
-    <section className="w-full px-6 pt-8 sm:pt-12 sm:px-12 lg:px-20 text-neutral-950 font-sans antialiased">
+    <section className="w-full px-6  text-neutral-950 font-sans antialiased">
       <div className="relative max-w-7xl mx-auto ">
         <div className="grid grid-cols-1 md:grid-cols-2 relative">
           
@@ -148,7 +148,7 @@ export default function TestimonialSection() {
               <img 
                 src={testimonials[1].avatar} 
                 alt={testimonials[1].author} 
-                className="w-[70px] h-[70px] rounded-full object-cover grayscale border border-neutral-300/40"
+                className="w-[60px] h-[60px] md:w-[70px] md:h-[70px] rounded-full object-cover grayscale border border-neutral-300/40"
               />
               <div className="flex flex-col">
                 <h4 className="text-base font-bold text-neutral-900 leading-tight tracking-tight">

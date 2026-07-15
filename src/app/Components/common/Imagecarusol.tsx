@@ -39,7 +39,7 @@ export default function ImageCarousel({
         ease: [0.22, 1, 0.36, 1],
       }}
       // Fixed layout height/width to look uniform on mobile viewports
-      className="inline-block relative w-[4rem] h-[2.5rem] sm:w-[5rem] sm:h-[4rem] md:w-[8rem] md:h-[5.5rem] bg-gray-200 rounded-[1rem] sm:rounded-[1.5rem] md:rounded-[2.25rem] mx-1 sm:mx-2 md:mx-4 overflow-hidden align-middle -mt-1 sm:-mt-2 md:-mt-4 border-[1px] md:border-[2px] border-black shadow-[4px_12px_24px_rgba(0,0,0,0.35)] bg-clip-padding"
+      className="inline-block relative w-[5rem] h-[3.25rem] sm:w-[6.5rem] sm:h-[4.25rem] md:w-[8.5rem] md:h-[5.5rem] bg-gray-200 rounded-[1rem] sm:rounded-[1.5rem] md:rounded-[2.25rem] mx-1 sm:mx-2 md:mx-4 overflow-hidden align-middle -mt-1 sm:-mt-2 md:-mt-4 border-[1px] md:border-[2px] border-black shadow-[4px_12px_24px_rgba(0,0,0,0.35)] bg-clip-padding"
     >
       <AnimatePresence initial={false}>
         <motion.div

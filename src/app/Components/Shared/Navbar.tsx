@@ -75,7 +75,7 @@ export default function Navbar() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.94 }}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black shadow-[0_2px_10px_rgba(0,0,0,0.06)]"
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-black shadow-[0_2px_10px_rgba(0,0,0,0.06)]"
           >
             <svg
   viewBox="0 0 24 24"
@@ -139,7 +139,7 @@ export default function Navbar() {
                     >
                       <a
                         href={link.href}
-                        className="transition-opacity hover:opacity-60"
+                        className="transition-opacity hover:opacity-60 "
                         onClick={() => setIsOpen(false)}
                       >
                         {link.label}

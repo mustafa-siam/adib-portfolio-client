@@ -8,17 +8,19 @@ import TestimonialSection from '../Components/Home/Testimonial'
 import AboutSection from '../Components/Home/AboutSection'
 import FAQSection from '../Components/Home/Faq'
 import FooterSection from '../Components/Home/Footer'
+import RecentWork from '../Components/Home/RecentWorks'
 
 const page = () => {
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-background antialiased">
       <Navbar />
-      <main className="flex flex-col gap-6 sm:gap-10 md:gap-14">
+      <main className="space-y-10 md:space-y-20">
         <Hero />
         <WorkSection />
         <HelloSection />
         <ProcessSection />
         <TestimonialSection />
+        <RecentWork></RecentWork>
         <AboutSection />
         <FAQSection />
       </main>

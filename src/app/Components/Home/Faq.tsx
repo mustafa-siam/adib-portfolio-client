@@ -94,7 +94,7 @@ export default function FAQSection() {
   ];
 
   return (
-    <section className="w-full px-6 pb-12 md:pb-16 md:px-12 lg:px-20 overflow-hidden text-[#1A1A1A] font-sans select-none">
+    <section className="w-full px-6 pb-10 md:pb-20 overflow-hidden text-[#1A1A1A] font-sans select-none">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           variants={containerVariants}
@@ -151,9 +151,9 @@ export default function FAQSection() {
   href="#"
   className="group p-2 bg-white/80 backdrop-blur-md rounded-[3rem] shadow-[0px_8px_24px_rgba(0,0,0,0.06),0px_16px_48px_rgba(0,0,0,0.04)] inline-flex items-center hover:scale-[1.02] active:scale-[0.98] transition-transform w-full"
 >
-  <div className="relative w-full bg-black text-white px-8 md:px-10 py-4 md:py-[1.125rem] rounded-[2.5rem] font-normal text-sm flex items-center justify-center gap-3 overflow-hidden">
+  <div className="relative w-full bg-black text-white px-6 md:px-10 py-4 md:py-[1.125rem] rounded-[2.5rem] font-normal text-sm flex items-center justify-center gap-3 overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-b from-white/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-    <span className="relative z-10">Book a Discovery Call</span> 
+    <span className="relative z-10">Book an Appointment</span> 
     <div className="relative z-10 w-4 h-4 flex items-center overflow-hidden">
       <svg 
         className="absolute w-4 h-4 transition-transform duration-300 group-hover:translate-x-full" 
