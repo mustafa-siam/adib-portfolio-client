@@ -136,9 +136,9 @@ export default function FAQSection() {
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-14 rounded-full overflow-hidden bg-neutral-300">
                   <img 
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" 
+                    src="/adib.jpeg" 
                     alt="Joris van Dijk Avatar" 
-                    className="w-full h-full object-cover grayscale"
+                    className="w-full h-full object-cover "
                   />
                 </div>
                 <div>

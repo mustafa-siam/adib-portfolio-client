@@ -142,7 +142,7 @@ export default function AboutSection() {
               <motion.img
                 src="/adib.jpeg"
                 alt="Joris van Dijk"
-                className="w-full h-full object-cover grayscale brightness-95 contrast-[1.02] transition-all duration-1000 ease-out group-hover:scale-102"
+                className="w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-102"
               />
               <div className="absolute inset-0 ring-1 ring-black/5 rounded-[36px] pointer-events-none" />
             </motion.div>
