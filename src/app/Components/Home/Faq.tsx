@@ -179,7 +179,7 @@ export default function FAQSection() {
 
               <p className="text-sm text-neutral-400 font-normal w-full text-center mt-4
                ">
-                Or, email me at <a href="mailto:joris@hanzo.com" className="text-[#FF5C35] hover:underline transition-all">joris@hanzo.com</a>
+                Or, email me at <a href="mailto:joris@hanzo.com" className="text-[#FF5C35] hover:underline transition-all">ishraqaladib@gmail.com</a>
               </p>
             </motion.div>
           </div>

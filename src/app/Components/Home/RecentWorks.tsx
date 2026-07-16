@@ -144,7 +144,7 @@ export default function RecentWork() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-4xl sm:text-5xl font-semibold tracking-tight text-neutral-900"
         >
-          Recent Case Studies
+          Recent Work
         </motion.h2>
       </motion.div>
 

@@ -95,9 +95,9 @@ export default function AboutSection() {
   } as const;
 
   const experienceData = [
-    { role: 'Motion Designer ', company: 'Auth Lab', period: 'Aug 2024-Present' },
+    { role: 'Motion Designer ', company: 'authLab a.k.a WPManageNinja', period: 'Aug 2024-Present' },
     { role: 'Video Editor ', company: 'Nafees Salim ', period: 'July 2022 - Aug 2024' },
-    { role: 'Video Editor ', company: 'UX talk', period: 'May 2023- Jan 2024' },
+    { role: 'Video Editor ', company: 'UX talk with Atiq', period: 'May 2023- Jan 2024' },
   ];
 
   return (
@@ -122,7 +122,7 @@ export default function AboutSection() {
           <div className="text-center mb-16 md:mb-20">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-[#1A1A1A]">
               Pushing boundaries{' '}
-              <span className=" text-neutral-400 font-medium">since 2011</span>
+              <span className=" text-neutral-400 font-medium">since 2020</span>
             </h2>
           </div>
         </motion.div>

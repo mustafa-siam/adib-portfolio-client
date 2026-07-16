@@ -106,7 +106,7 @@ export default function FooterSection() {
       <div className="w-36 h-px bg-white/15" />
 
       <span className="text-[15px] text-neutral-300 tracking-tight">
-        © Hanzo Studio, 2025
+        All rights reserved by Ishraq Al Adib @2026
       </span>
     </div>
 
