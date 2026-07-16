@@ -96,12 +96,24 @@ export default function PortfolioCard({
 
       {/* Meta Text Row - Fully aligned on one line */}
       <div className="mt-5 flex flex-wrap items-center justify-between gap-4 px-1">
-        
-        {/* Left Side: Title and See Details Button side-by-side */}
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xl font-medium tracking-tight text-neutral-900 whitespace-nowrap">
+        <div>
+<span className="text-xl font-medium tracking-tight text-neutral-900 whitespace-nowrap">
             {item.title}
           </span>
+        </div>
+         
+        {/* Right Side: Tags Container */}
+        <div className="flex flex-wrap gap-1.5 justify-end">
+          {item.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-neutral-200/60 bg-white/50 backdrop-blur-sm px-2.5 py-0.5 text-xs font-medium text-neutral-500 tracking-tight whitespace-nowrap"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+           <div className="">
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -114,19 +126,6 @@ export default function PortfolioCard({
             <ArrowUpRight className="w-3.5 h-3.5 opacity-70 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
           </button>
         </div>
-
-        {/* Right Side: Tags Container */}
-        <div className="flex flex-wrap gap-1.5 justify-end">
-          {item.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-neutral-200/60 bg-white/50 backdrop-blur-sm px-2.5 py-0.5 text-xs font-medium text-neutral-500 tracking-tight whitespace-nowrap"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
       </div>
     </div>
   );

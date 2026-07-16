@@ -18,11 +18,11 @@ export type CaseStudy = {
 };
 
 const CASE_STUDIES: CaseStudy[] = [
-  {
+   {
     id: "strida",
     title: "Strida",
     tags: ["portfolio", "sidebar"],
-    poster: "/vedio1.jpeg",
+    poster: "/vedio.jpeg",
     videoUrl: "https://youtu.be/wa_1jCRZb24?si=o7epuxxhdbrLKIza", // Added placeholder video
     href: "/work/strida",
   },
@@ -30,7 +30,7 @@ const CASE_STUDIES: CaseStudy[] = [
     id: "bravo",
     title: "Bravo",
     tags: ["UI/UX", "App"],
-    poster: "/vedio2.jpeg",
+    poster: "/vedio1.jpeg",
     videoUrl: "https://youtu.be/4GFq-MGiemw?si=Se_ZLLoXPGAXBjTX", // Added placeholder video
     href: "/work/bravo",
   },
@@ -38,7 +38,7 @@ const CASE_STUDIES: CaseStudy[] = [
     id: "quattro",
     title: "Quattro",
     tags: ["branding", "web"],
-    poster: "/vedio3.jpeg",
+    poster: "/vedio2.jpeg",
     videoUrl: "https://youtu.be/-oeIg7eQ6us?si=KGmmaShV1xYBi9HM", // Added placeholder video
     href: "/work/quattro",
   },
@@ -46,7 +46,7 @@ const CASE_STUDIES: CaseStudy[] = [
     id: "nitro",
     title: "Nitro",
     tags: ["product", "landing"],
-    poster: "https://picsum.photos/id/1045/800/600",
+    poster: "/vedio3.jpeg",
     videoUrl: "https://youtu.be/tU5MbLX5R70?si=UGJVUAaReMRbEfXx", // Added placeholder video
     href: "/work/nitro",
   },

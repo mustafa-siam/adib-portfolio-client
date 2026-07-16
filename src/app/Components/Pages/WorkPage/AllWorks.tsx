@@ -21,49 +21,33 @@ const ALL_CASE_STUDIES: LocalCaseStudy[] = [
     id: "strida",
     title: "Strida",
     tags: ["portfolio", "sidebar"],
-    poster: "https://picsum.photos/id/1015/800/600",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    poster: "/vedio.jpeg",
+    videoUrl: "https://youtu.be/wa_1jCRZb24?si=o7epuxxhdbrLKIza", // Added placeholder video
     href: "/work/strida",
   },
   {
     id: "bravo",
     title: "Bravo",
     tags: ["UI/UX", "App"],
-    poster: "https://picsum.photos/id/1025/800/600",
-    videoUrl: "https://www.youtube.com/watch?v=aqz-KE-BPKQ",
+    poster: "/vedio1.jpeg",
+    videoUrl: "https://youtu.be/4GFq-MGiemw?si=Se_ZLLoXPGAXBjTX", // Added placeholder video
     href: "/work/bravo",
   },
   {
     id: "quattro",
     title: "Quattro",
     tags: ["branding", "web"],
-    poster: "https://picsum.photos/id/1035/800/600",
-    videoUrl: "https://www.youtube.com/watch?v=3JZ_D3JDzRI",
+    poster: "/vedio2.jpeg",
+    videoUrl: "https://youtu.be/-oeIg7eQ6us?si=KGmmaShV1xYBi9HM", // Added placeholder video
     href: "/work/quattro",
   },
   {
     id: "nitro",
     title: "Nitro",
     tags: ["product", "landing"],
-    poster: "https://picsum.photos/id/1045/800/600",
-    videoUrl: "https://www.youtube.com/watch?v=9bZkp7q19f0",
+    poster: "/vedio3.jpeg",
+    videoUrl: "https://youtu.be/tU5MbLX5R70?si=UGJVUAaReMRbEfXx", // Added placeholder video
     href: "/work/nitro",
-  },
-  {
-    id: "omega",
-    title: "Omega",
-    tags: ["E-Commerce", "Web3"],
-    poster: "https://picsum.photos/id/1055/800/600",
-    videoUrl: "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
-    href: "/work/omega",
-  },
-  {
-    id: "vertex",
-    title: "Vertex",
-    tags: ["SaaS", "Dashboard"],
-    poster: "https://picsum.photos/id/1065/800/600",
-    videoUrl: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
-    href: "/work/vertex",
   },
 ];
 
