@@ -64,7 +64,7 @@ export default function AboutSection() {
     },
   } as const;
 
-  const descriptionText = "Joris van Dijk is a Dutch designer known for his minimalist, expressive digital work. He helps startups and studios create clean interfaces and strong branding. Based in Utrecht, he blends function with emotion — and often spends his free time cycling or exploring generative art.";
+  const descriptionText = "Experienced Motion Designer and Video Editor with a strong background in the Video production industry. Currently specializing in the WordPress ecosystem, creating high impact motion graphics and video content for leading plugins like FluentForms, FluentBoards, and FluentCart etc. Beyond marketing videos for softwares and SaaS products, I collaborated with Top YouTube content creators and digital agencies to elevate their visual storytelling. Skilled in Motion Graphics, Video Editing, Graphic Design, Cinematography, and Photography, with a proven track record of driving business development through compelling Videos and Product Demo videos.";
   const words = descriptionText.split(" ");
 
   // Cascaded the 1-second delay down to the split text layout engine
@@ -95,10 +95,9 @@ export default function AboutSection() {
   } as const;
 
   const experienceData = [
-    { role: 'Freelance Practice', company: 'Hanzo Co.', period: '2011 — Now' },
-    { role: 'Design Lead', company: 'Google', period: '2024 — Now' },
-    { role: 'Senior Designer', company: 'PayPal', period: '2019 — 2024' },
-    { role: 'Product Designer', company: 'Meta', period: '2016 — 2019' },
+    { role: 'Motion Designer ', company: 'Auth Lab', period: 'Aug 2024-Present' },
+    { role: 'Video Editor ', company: 'Nafees Salim ', period: 'July 2022 - Aug 2024' },
+    { role: 'Video Editor ', company: 'UX talk', period: 'May 2023- Jan 2024' },
   ];
 
   return (
@@ -141,7 +140,7 @@ export default function AboutSection() {
               className="relative w-full overflow-hidden rounded-[36px] bg-[#DCDCDC] shadow-2xl shadow-black/5 aspect-[4/3] lg:aspect-[10/11] origin-center will-change-transform"
             >
               <motion.img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85"
+                src="/adib.jpeg"
                 alt="Joris van Dijk"
                 className="w-full h-full object-cover grayscale brightness-95 contrast-[1.02] transition-all duration-1000 ease-out group-hover:scale-102"
               />
@@ -155,8 +154,8 @@ export default function AboutSection() {
                 <a href="#" className="hover:text-black transition-colors duration-300">X</a>
               </div>
               <div className="text-right">
-                <h4 className="font-semibold text-sm tracking-wide text-[#1A1A1A]">Joris van Dijk</h4>
-                <p className="text-xs text-neutral-500 mt-0.5">Hanzo Studio, Founder</p>
+                <h4 className="font-semibold text-sm tracking-wide text-[#1A1A1A]"> Ishraq Al Adib</h4>
+                <p className="text-xs text-neutral-500 mt-0.5">Motion Designer</p>
               </div>
             </motion.div>
           </div>
@@ -164,7 +163,7 @@ export default function AboutSection() {
           <div className="lg:col-span-7 w-full flex flex-col justify-between h-full pt-4">
             <motion.div 
               variants={textContainerVariants}
-              className="flex flex-wrap gap-x-[6px] gap-y-1 text-xl md:text-2xl lg:text-[26px] font-normal leading-relaxed text-neutral-800 max-w-2xl tracking-tight"
+              className="flex flex-wrap gap-x-[6px] text-lg md:text-xl font-normal leading-relaxed text-neutral-800 max-w-2xl tracking-tighter"
             >
               {words.map((word, i) => (
                 <motion.span
@@ -177,7 +176,7 @@ export default function AboutSection() {
               ))}
             </motion.div>
 
-            <div className="mt-16 lg:mt-20 space-y-0 w-full border-l border-neutral-400 pl-6 md:pl-8">
+            <div className="mt-16 md:mt-10 space-y-0 w-full border-l border-neutral-400 pl-6 md:pl-8">
               {experienceData.map((item, index) => (
                 <motion.div 
                   key={index} 

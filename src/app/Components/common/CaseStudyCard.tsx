@@ -36,11 +36,11 @@ export default function CaseStudyCard({
   const isLeftColumn = index % 2 === 0;
   const tilt = isLeftColumn ? -2 : 2;
 
+  // The inline styles now only handle the entering transition (opacity/translateY)
+  // and the specific index delay.
   const wrapperStyle: CSSProperties = {
     opacity: inView ? 1 : 0,
-    transform: inView
-      ? `translateY(0) rotate(${tilt}deg)`
-      : `translateY(40px) rotate(${tilt}deg)`,
+    transform: inView ? "translateY(0)" : "translateY(40px)",
     transitionDelay: `${index * 140}ms`,
   };
 
@@ -53,8 +53,11 @@ export default function CaseStudyCard({
       }}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className="group block text-inherit no-underline transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-      style={wrapperStyle}
+      className="group block text-inherit no-underline transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] [rotate:var(--tilt)] md:[rotate:0deg]"
+      style={{
+        ...wrapperStyle,
+        "--tilt": `${tilt}deg`,
+      } as CSSProperties}
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[#161616] shadow-[0_15px_35px_rgba(0,0,0,0.04)]">
         <Image

@@ -5,13 +5,14 @@ import type { MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, Variants } from "motion/react";
-import CaseStudyCard from "../../common/CaseStudyCard";
+import PortfolioCard from "../../common/PortfolioCard";
 
 interface LocalCaseStudy {
   id: string;
   title: string;
   tags: string[];
   poster: string;
+  videoUrl?: string;
   href: string;
 }
 
@@ -21,6 +22,7 @@ const ALL_CASE_STUDIES: LocalCaseStudy[] = [
     title: "Strida",
     tags: ["portfolio", "sidebar"],
     poster: "https://picsum.photos/id/1015/800/600",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     href: "/work/strida",
   },
   {
@@ -28,6 +30,7 @@ const ALL_CASE_STUDIES: LocalCaseStudy[] = [
     title: "Bravo",
     tags: ["UI/UX", "App"],
     poster: "https://picsum.photos/id/1025/800/600",
+    videoUrl: "https://www.youtube.com/watch?v=aqz-KE-BPKQ",
     href: "/work/bravo",
   },
   {
@@ -35,6 +38,7 @@ const ALL_CASE_STUDIES: LocalCaseStudy[] = [
     title: "Quattro",
     tags: ["branding", "web"],
     poster: "https://picsum.photos/id/1035/800/600",
+    videoUrl: "https://www.youtube.com/watch?v=3JZ_D3JDzRI",
     href: "/work/quattro",
   },
   {
@@ -42,6 +46,7 @@ const ALL_CASE_STUDIES: LocalCaseStudy[] = [
     title: "Nitro",
     tags: ["product", "landing"],
     poster: "https://picsum.photos/id/1045/800/600",
+    videoUrl: "https://www.youtube.com/watch?v=9bZkp7q19f0",
     href: "/work/nitro",
   },
   {
@@ -49,6 +54,7 @@ const ALL_CASE_STUDIES: LocalCaseStudy[] = [
     title: "Omega",
     tags: ["E-Commerce", "Web3"],
     poster: "https://picsum.photos/id/1055/800/600",
+    videoUrl: "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
     href: "/work/omega",
   },
   {
@@ -56,6 +62,7 @@ const ALL_CASE_STUDIES: LocalCaseStudy[] = [
     title: "Vertex",
     tags: ["SaaS", "Dashboard"],
     poster: "https://picsum.photos/id/1065/800/600",
+    videoUrl: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
     href: "/work/vertex",
   },
 ];
@@ -131,7 +138,6 @@ export default function AllWorks() {
     <section className="w-full px-6 sm:px-12 pt-32 pb-24 select-none min-h-screen bg-neutral-50/50">
       <div className="mx-auto max-w-7xl">
         
-        {/* Left Aligned Interactive Back Button */}
         <div className="w-full flex justify-start mb-10 sm:mb-14">
           <motion.button
             initial={{ opacity: 0, x: -10 }}
@@ -151,7 +157,6 @@ export default function AllWorks() {
           </motion.button>
         </div>
 
-        {/* Clean Left-Aligned Premium Header Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:mb-24 mb-16 items-end">
           <motion.div 
             variants={containerVariants}
@@ -189,19 +194,17 @@ export default function AllWorks() {
           </motion.div>
         </div>
 
-        {/* Structural Grid Track Canvas */}
         <div
           ref={gridRef}
           onMouseMove={handleMouseMove}
-          className="relative grid grid-cols-1 gap-x-8 gap-y-12 sm:gap-y-20 sm:grid-cols-2"
+          className="relative grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-24 sm:grid-cols-2"
           style={{ perspective: 1200 }}
         >
           {ALL_CASE_STUDIES.map((item, index) => (
-            <CaseStudyCard
+            <PortfolioCard
               key={item.id}
               item={item}
               index={index}
-              inView={true}
               isHovered={hoveredId === item.id}
               onEnter={() => handleCardEnter(item.id)}
               onLeave={handleCardLeave}
@@ -209,7 +212,6 @@ export default function AllWorks() {
             />
           ))}
 
-          {/* Floating Pointer Context Element */}
           <div
             ref={bubbleRef}
             aria-hidden

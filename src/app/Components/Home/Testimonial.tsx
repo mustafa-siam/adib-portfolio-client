@@ -13,16 +13,16 @@ type TestimonialItem = {
 
 const testimonials: TestimonialItem[] = [
   {
-    quote: "Working with Joris was a game-changer. He instantly understood our vision and translated it into a sleek, intuitive product. The process felt effortless, and the results exceeded our expectations.",
-    author: "Sophie Lemaire",
-    role: "Product Lead at Loomi",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80",
+    quote: "With only 48 hours to create a 2 minute explainer video for the EBL Undergrad Startup Challenge 2025, Adib took full charge of the creative direction and post production. He edited the entire video overnight, helping Zagle.ai secure 2nd Place in the competition.He quickly understands a brand's vision and gives his all to every project. I highly recommend working with him.",
+    author: "Fahim Ahmed Nafis",
+    role: "Founder & CEO, Zagle.ai",
+    avatar: "/fahim.jpeg",
   },
   {
-    quote: "Joris brings clarity to chaos. His design work is not only beautiful but deeply strategic. He helped us rebrand from the ground up, and our audience response has been incredible.",
-    author: "Milan Bakker",
-    role: "Founder of Drifted Studio",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80",
+    quote: "Building Aurum Concierge from the ground up was a big task, but Ishraq and his team made the process seamless. They brought my vision to life with outstanding branding and a professional website, delivering everything quickly with excellent communication. Their dedication made it an easy decision to continue working with them for marketing consultancy. I highly recommend their team.",
+    author: "Damarys Arroyo",
+    role: "Aurum Concierge",
+    avatar: "/aurrum.jpeg",
   },
 ];
 
@@ -114,7 +114,7 @@ export default function TestimonialSection() {
           {/* RIGHT TESTIMONIAL BLOCK (Dropped significantly lower to align perfectly below left side) */}
           <div className="flex flex-col justify-between md:pl-14 lg:pl-20 pt-12 md:pt-32">
             <div className="relative w-full">
-              <div className="absolute right-0 top-1 text-neutral-500 text-4xl font-serif font-bold select-none pointer-events-none leading-none">
+              <div className="absolute right-0 top-1 text-neutral-500 text-2xl font-serif font-bold select-none pointer-events-none leading-none tracking-tighter">
                 <Quote></Quote>
               </div>
               

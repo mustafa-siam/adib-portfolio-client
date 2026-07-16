@@ -53,12 +53,12 @@ const icons = {
 };
 
 const pills: Pill[] = [
-  { label: "Design systems", icon: icons.grid, iconBg: "bg-orange-500", side: "left", top: "32%", offset: "-22%", delay: 0.05, float: 4.2 },
-  { label: "UI/UX", icon: icons.square, iconBg: "bg-neutral-800", side: "left", top: "58%", offset: "-14%", delay: 0.15, float: 5.1 },
-  { label: "Research", icon: icons.search, iconBg: "bg-sky-500", side: "left", top: "84%", offset: "-18%", delay: 0.25, float: 4.6 },
+  { label: "Story Board", icon: icons.grid, iconBg: "bg-orange-500", side: "left", top: "32%", offset: "-22%", delay: 0.05, float: 4.2 },
+  { label: "Video Editing", icon: icons.square, iconBg: "bg-neutral-800", side: "left", top: "58%", offset: "-14%", delay: 0.15, float: 5.1 },
+  { label: "Motion Design", icon: icons.search, iconBg: "bg-sky-500", side: "left", top: "84%", offset: "-18%", delay: 0.25, float: 4.6 },
   { label: "Animation", icon: icons.bolt, iconBg: "bg-emerald-500", side: "right", top: "30%", offset: "-20%", delay: 0.1, float: 4.8 },
   { label: "Prototyping", icon: icons.layers, iconBg: "bg-pink-500", side: "right", top: "56%", offset: "-12%", delay: 0.2, float: 5.4 },
-  { label: "Strategy", icon: icons.spark, iconBg: "bg-amber-400", side: "right", top: "82%", offset: "-16%", delay: 0.3, float: 4.4 },
+  { label: "Content Strategy", icon: icons.spark, iconBg: "bg-amber-400", side: "right", top: "82%", offset: "-16%", delay: 0.3, float: 4.4 },
 ];
 
 const mobilePills: Pill[] = [pills[0], pills[3], pills[1], pills[4], pills[2], pills[5]];
@@ -111,10 +111,14 @@ const fallbackPillVariants: Variants = {
 };
 
 const headlineSegments = [
-  { text: "We help startups and enterprise to establish an", className: "text-neutral-900" },
+  { text: "I help WordPress Plugins,", className: "text-neutral-900" },
+  { text: "SaaS Products,", className: "text-neutral-500" },
+  { text: "Startups,", className: "text-neutral-900" },
+  { text: "Content Creators", className: "text-neutral-500" },
+  { text: "establish an", className: "text-neutral-900" },
   { text: "emotional connection", className: "text-neutral-500" },
   { text: "between their products and", className: "text-neutral-900" },
-  { text: "happy engaged customers", className: "text-neutral-500" },
+  { text: "happy engaged customers.", className: "text-neutral-500" },
 ];
 
 const headlineWords = headlineSegments.flatMap((segment) =>
@@ -158,20 +162,20 @@ export default function HelloSection() {
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
+        viewport={{ once: true, amount: "some" }} // Fixed: Changed 0.25 to "some" to guarantee activation on screen load
         className="relative mx-auto w-full max-w-3xl text-center"
       >
         <motion.div
           variants={fallbackPillVariants}
-          className="sm:mb-20 mb-14 flex items-center justify-center gap-4 text-neutral-500 "
+          className="sm:mb-20 mb-14 flex items-center justify-center gap-4 text-neutral-500"
         >
           <span className="h-px w-10 bg-neutral-400/40" />
           <span className="font-serif text-lg italic tracking-wide">Hello!</span>
           <span className="h-px w-10 bg-neutral-400/40" />
         </motion.div>
 
+        {/* Removed intermediate custom variant on h1 to allow parent stagger to flow uninterrupted down to the words */}
         <motion.h1
-          variants={headlineContainerVariants}
           className="text-balance text-2xl font-medium leading-snug sm:text-4xl md:text-[2.75rem] px-4"
         >
           {headlineWords.map((item, i) => (
@@ -186,7 +190,7 @@ export default function HelloSection() {
           ))}
         </motion.h1>
 
-        {/* Desktop pill layout wrapper linked to delayed stagger execution */}
+        {/* Desktop pill layout wrapper */}
         <motion.div variants={pillContainerVariants} className="absolute inset-0 pointer-events-none hidden sm:block">
           {pills.map((pill) => (
             <motion.div
@@ -214,7 +218,7 @@ export default function HelloSection() {
           ))}
         </motion.div>
 
-        {/* Mobile premium fly-in pill grid with delayed wrapper execution */}
+        {/* Mobile pill grid */}
         <motion.div
           variants={pillContainerVariants}
           className="relative mt-12 h-[240px] sm:hidden"

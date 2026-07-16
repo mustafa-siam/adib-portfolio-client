@@ -34,8 +34,8 @@ const fallbackPillVariants: Variants = {
 const processSteps: ProcessStep[] = [
   {
     number: "1",
-    title: "Subscribe",
-    description: "Choose a plan and request as many designs as you need.",
+    title: "Book a Call",
+    description: " Tell what you need in a One to One Call",
     initialRotate: -3,
     hoverRotate: -0.5,
     yClass: "md:translate-y-4",
@@ -43,8 +43,8 @@ const processSteps: ProcessStep[] = [
   },
   {
     number: "2",
-    title: "Request",
-    description: "Choose a plan and request as many designs as you need.",
+    title: "Story Board",
+    description: "Visualise how your video will look through Storyboarding",
     initialRotate: 3.5,
     hoverRotate: 1,
     yClass: "md:-translate-y-12 md:z-10",
@@ -52,8 +52,8 @@ const processSteps: ProcessStep[] = [
   },
   {
     number: "3",
-    title: "Get Your Designs",
-    description: "Choose a plan and request as many designs as you need.",
+    title: "Get your Video",
+    description: "Watch your product video Shine.",
     initialRotate: -2,
     hoverRotate: -4,
     yClass: "md:translate-y-12",

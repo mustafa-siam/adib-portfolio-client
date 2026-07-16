@@ -143,9 +143,16 @@ export default function WorkSection() {
 
   return (
     <section className="w-full py-2 px-4 sm:px-10 lg:px-16">
-      <div
-        ref={containerRef}
-        className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[40px] border-white/95 border-8 bg-[#161616] px-4 sm:px-8 h-[800px] sm:h-[1100px] lg:h-[1300px]"
+      <motion.div
+         ref={containerRef}
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{
+    duration: 0.8,
+    ease: [0.22, 1, 0.36, 1],
+  }}
+  className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[40px] border-white/95 border-8 bg-[#161616] px-4 sm:px-8 h-[800px] sm:h-[1100px] lg:h-[1300px]"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 h-full">
           {/* Left Column */}
@@ -170,7 +177,7 @@ export default function WorkSection() {
 
         <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#161616] via-[#161616]/70 to-transparent z-10" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#161616] via-[#161616]/70 to-transparent z-10" />
-      </div>
+      </motion.div>
     </section>
   );
 }

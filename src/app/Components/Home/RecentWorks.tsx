@@ -5,7 +5,7 @@ import type { MouseEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import CaseStudyCard from "../common/CaseStudyCard";
+import PortfolioCard from "../common/PortfolioCard"; // Replaced with PortfolioCard
 import { motion, Variants } from "motion/react";
 
 export type CaseStudy = {
@@ -13,6 +13,7 @@ export type CaseStudy = {
   title: string;
   tags: string[];
   poster: string;
+  videoUrl?: string; // Added optional videoUrl support
   href: string;
 };
 
@@ -21,21 +22,24 @@ const CASE_STUDIES: CaseStudy[] = [
     id: "strida",
     title: "Strida",
     tags: ["portfolio", "sidebar"],
-    poster: "https://picsum.photos/id/1015/800/600",
+    poster: "/vedio1.jpeg",
+    videoUrl: "https://youtu.be/wa_1jCRZb24?si=o7epuxxhdbrLKIza", // Added placeholder video
     href: "/work/strida",
   },
   {
     id: "bravo",
     title: "Bravo",
     tags: ["UI/UX", "App"],
-    poster: "https://picsum.photos/id/1025/800/600",
+    poster: "/vedio2.jpeg",
+    videoUrl: "https://youtu.be/4GFq-MGiemw?si=Se_ZLLoXPGAXBjTX", // Added placeholder video
     href: "/work/bravo",
   },
   {
     id: "quattro",
     title: "Quattro",
     tags: ["branding", "web"],
-    poster: "https://picsum.photos/id/1035/800/600",
+    poster: "/vedio3.jpeg",
+    videoUrl: "https://youtu.be/-oeIg7eQ6us?si=KGmmaShV1xYBi9HM", // Added placeholder video
     href: "/work/quattro",
   },
   {
@@ -43,6 +47,7 @@ const CASE_STUDIES: CaseStudy[] = [
     title: "Nitro",
     tags: ["product", "landing"],
     poster: "https://picsum.photos/id/1045/800/600",
+    videoUrl: "https://youtu.be/tU5MbLX5R70?si=UGJVUAaReMRbEfXx", // Added placeholder video
     href: "/work/nitro",
   },
 ];
@@ -55,7 +60,6 @@ export default function RecentWork() {
   const gridRef = useRef<HTMLDivElement>(null);
   const bubbleRef = useRef<HTMLDivElement>(null);
 
-  const [inView, setInView] = useState<boolean>(false);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [cursorVisible, setCursorVisible] = useState<boolean>(false);
 
@@ -63,40 +67,23 @@ export default function RecentWork() {
   const rendered = useRef({ x: 0, y: 0 });
   const rafId = useRef<number | null>(null);
 
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
+  const containerVariants: Variants = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+    },
+  };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry?.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
+  const fallbackPillVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.75, y: 14 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 220, damping: 20, duration: 0.6, delay: 0.2 },
+    },
+  };
 
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-const containerVariants: Variants = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-  },
-};
-
-const fallbackPillVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.75, y: 14 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 220, damping: 20,duration: 0.6,delay: 0.2 },
-  },
-};
   useEffect(() => {
     const tick = () => {
       rendered.current.x += (target.current.x - rendered.current.x) * CURSOR_EASE;
@@ -143,23 +130,23 @@ const fallbackPillVariants: Variants = {
         className="text-center sm:mb-24 mb-16"
       >
         <motion.div
-                    variants={fallbackPillVariants}
-                    className="flex items-center justify-center gap-4 text-neutral-500 mb-3"
-                  >
-                    <span className="h-px w-10 bg-neutral-400/40" />
-                    <span className="font-serif text-lg italic tracking-wide">Our Projects</span>
-                    <span className="h-px w-10 bg-neutral-400/40" />
-                  </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-4xl sm:text-5xl font-semibold tracking-tight text-neutral-900"
-          >
-            Recent Case Studies
-          </motion.h2>
+          variants={fallbackPillVariants}
+          className="flex items-center justify-center gap-4 text-neutral-500 mb-3"
+        >
+          <span className="h-px w-10 bg-neutral-400/40" />
+          <span className="font-serif text-lg italic tracking-wide">Our Projects</span>
+          <span className="h-px w-10 bg-neutral-400/40" />
         </motion.div>
+        <motion.h2
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-4xl sm:text-5xl font-semibold tracking-tight text-neutral-900"
+        >
+          Recent Case Studies
+        </motion.h2>
+      </motion.div>
 
       <div
         ref={gridRef}
@@ -168,11 +155,10 @@ const fallbackPillVariants: Variants = {
         style={{ perspective: 1200 }}
       >
         {CASE_STUDIES.map((item, index) => (
-          <CaseStudyCard
+          <PortfolioCard
             key={item.id}
             item={item}
             index={index}
-            inView={inView}
             isHovered={hoveredId === item.id}
             onEnter={() => handleCardEnter(item.id)}
             onLeave={handleCardLeave}
