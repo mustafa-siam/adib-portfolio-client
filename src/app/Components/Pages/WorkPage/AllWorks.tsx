@@ -6,51 +6,7 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, Variants } from "motion/react";
 import PortfolioCard from "../../common/PortfolioCard";
-
-interface LocalCaseStudy {
-  id: string;
-  title: string;
-  tags: string[];
-  poster: string;
-  videoUrl?: string;
-  href: string;
-}
-
-const ALL_CASE_STUDIES: LocalCaseStudy[] = [
-  {
-    id: "strida",
-    title: "Strida",
-    tags: ["portfolio", "sidebar"],
-    poster: "/vedio.jpeg",
-    videoUrl: "https://youtu.be/wa_1jCRZb24?si=o7epuxxhdbrLKIza", // Added placeholder video
-    href: "/work/strida",
-  },
-  {
-    id: "bravo",
-    title: "Bravo",
-    tags: ["UI/UX", "App"],
-    poster: "/vedio1.jpeg",
-    videoUrl: "https://youtu.be/4GFq-MGiemw?si=Se_ZLLoXPGAXBjTX", // Added placeholder video
-    href: "/work/bravo",
-  },
-  {
-    id: "quattro",
-    title: "Quattro",
-    tags: ["branding", "web"],
-    poster: "/vedio2.jpeg",
-    videoUrl: "https://youtu.be/-oeIg7eQ6us?si=KGmmaShV1xYBi9HM", // Added placeholder video
-    href: "/work/quattro",
-  },
-  {
-    id: "nitro",
-    title: "Nitro",
-    tags: ["product", "landing"],
-    poster: "/vedio3.jpeg",
-    videoUrl: "https://youtu.be/tU5MbLX5R70?si=UGJVUAaReMRbEfXx", // Added placeholder video
-    href: "/work/nitro",
-  },
-];
-
+import { CASE_STUDIES } from "../../data/case-studies";
 const CURSOR_EASE = 0.14;
 
 export default function AllWorks() {
@@ -184,7 +140,7 @@ export default function AllWorks() {
           className="relative grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-24 sm:grid-cols-2"
           style={{ perspective: 1200 }}
         >
-          {ALL_CASE_STUDIES.map((item, index) => (
+          {CASE_STUDIES.map((item, index) => (
             <PortfolioCard
               key={item.id}
               item={item}
@@ -192,7 +148,7 @@ export default function AllWorks() {
               isHovered={hoveredId === item.id}
               onEnter={() => handleCardEnter(item.id)}
               onLeave={handleCardLeave}
-              onOpen={() => router.push(item.href)}
+               onOpen={() => router.push(`/work/${item.slug}`)}
             />
           ))}
 

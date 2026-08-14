@@ -13,13 +13,13 @@ type TestimonialItem = {
 
 const testimonials: TestimonialItem[] = [
   {
-    quote: "With only 48 hours to create a 2 minute explainer video for the EBL Undergrad Startup Challenge 2025, Adib took full charge of the creative direction and post production. He edited the entire video overnight, helping Zagle.ai secure 2nd Place in the competition.He quickly understands a brand's vision and gives his all to every project. I highly recommend working with him.",
+    quote: "With only 48 hours to create a 2-minute explainer, Adib took full charge of the creative direction and post-production. His dedication helped Zagle.ai secure 2nd Place in the EBL Undergrad Startup Challenge 2025. I highly recommend working with him.",
     author: "Fahim Ahmed Nafis",
     role: "Founder & CEO, Zagle.ai",
     avatar: "/fahim.jpeg",
   },
   {
-    quote: "Building Aurum Concierge from the ground up was a big task, but Ishraq and his team made the process seamless. They brought my vision to life with outstanding branding and a professional website, delivering everything quickly with excellent communication. Their dedication made it an easy decision to continue working with them for marketing consultancy. I highly recommend their team.",
+    quote: "Ishraq and his team brought my vision for Aurum Concierge to life with outstanding branding and a professional website. They were fast, communicative, and dedicated throughout the process. I highly recommend their team.",
     author: "Damarys Arroyo",
     role: "Aurum Concierge",
     avatar: "/aurrum.jpeg",

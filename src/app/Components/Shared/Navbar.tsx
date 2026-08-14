@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-
+import Link from "next/link";
+const MotionLink = motion.create(Link);
 const NAV_LINKS = [
   { label: "Process", href: "#process" },
   { label: "Work", href: "#work" },
@@ -51,8 +52,8 @@ export default function Navbar() {
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 p-6">
       <div className="mx-auto flex max-w-7xl items-start justify-between">
         {/* Logo */}
-        <motion.a
-          href="#top"
+        <MotionLink
+          href="/"
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
@@ -61,7 +62,7 @@ export default function Navbar() {
           className="pointer-events-auto rounded-full bg-white px-6 py-3 text-base font-semibold tracking-normal text-black shadow-[0_2px_10px_rgba(0,0,0,0.06)]"
         >
           Ishraq
-        </motion.a>
+        </MotionLink>
 
         {/* Menu toggle + dropdown */}
         <div className="pointer-events-auto relative">

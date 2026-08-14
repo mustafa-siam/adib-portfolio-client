@@ -3,15 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-
-export type CaseStudy = {
-  id: string;
-  title: string;
-  tags: string[];
-  poster: string;
-  videoUrl?: string;
-  href: string;
-};
+// 1. Import CaseStudy from your central data file
+import type { CaseStudy } from "../data/case-studies";
 
 interface PortfolioCardProps {
   item: CaseStudy;
@@ -94,10 +87,10 @@ export default function PortfolioCard({
         )}
       </div>
 
-      {/* Meta Text Row - Fully aligned on one line */}
+      {/* Meta Text Row */}
       <div className="mt-5 flex flex-wrap items-center justify-between gap-4 px-1">
         <div>
-<span className="text-xl font-medium tracking-tight text-neutral-900 whitespace-nowrap">
+          <span className="text-xl font-medium tracking-tight text-neutral-900 whitespace-nowrap">
             {item.title}
           </span>
         </div>
@@ -113,7 +106,8 @@ export default function PortfolioCard({
             </span>
           ))}
         </div>
-           <div className="">
+        
+        <div>
           <button
             onClick={(e) => {
               e.preventDefault();
