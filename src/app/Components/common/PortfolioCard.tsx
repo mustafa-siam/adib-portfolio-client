@@ -19,7 +19,7 @@ function getYouTubeId(url?: string): string | null {
   if (!url) return null;
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
   const match = url.match(regExp);
-  return match && match[2].length === 11 ? match[2] : url;
+  return match && match[2].length === 11 ? match[2] : null;
 }
 
 export default function PortfolioCard({
@@ -63,7 +63,6 @@ export default function PortfolioCard({
     >
       {/* Media Frame Container */}
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-neutral-900 shadow-[0_15px_35px_rgba(0,0,0,0.04)] select-none">
-        
         {/* Cover Poster Image */}
         <Image
           src={item.poster}
@@ -81,42 +80,43 @@ export default function PortfolioCard({
           <iframe
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&playsinline=1`}
             className="absolute inset-0 h-full w-full object-cover z-0"
-            allow="autoplay; encrypted-media"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
             frameBorder="0"
           />
         )}
       </div>
+       {/* Meta Text Row */}
+      <div className="mt-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-1">
+        {/* 1. Title (Left on desktop) */}
+        <span className="text-xl font-medium tracking-tight text-neutral-900 shrink-0">
+          {item.title}
+        </span>
 
-      {/* Meta Text Row */}
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-4 px-1">
-        <div>
-          <span className="text-xl font-medium tracking-tight text-neutral-900 whitespace-nowrap">
-            {item.title}
-          </span>
-        </div>
-         
-        {/* Right Side: Tags Container */}
-        <div className="flex flex-wrap gap-1.5 justify-end">
-          {item.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-neutral-200/60 bg-white/50 backdrop-blur-sm px-2.5 py-0.5 text-xs font-medium text-neutral-500 tracking-tight whitespace-nowrap"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        
-        <div>
+        {/* 2. Controls Row (Below title on mobile; inline in the middle & right on desktop) */}
+        <div className="flex items-center justify-between md:justify-end gap-3 w-full md:w-auto md:flex-1 md:ml-4">
+          {/* Tags (Left on mobile, Middle on desktop) */}
+          <div className="flex flex-wrap gap-1.5 items-center justify-start md:justify-center md:flex-1">
+            {item.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-neutral-200/60 bg-white/50 backdrop-blur-sm px-2.5 py-0.5 text-xs font-medium text-neutral-500 tracking-tight whitespace-nowrap"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* See Details Button (Right on mobile & desktop) */}
           <button
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
               onOpen();
             }}
-            className="text-xs font-semibold text-neutral-400 tracking-wide uppercase inline-flex items-center gap-0.5 hover:text-neutral-950 transition-colors duration-300 cursor-pointer group/btn h-fit self-center"
+            className="text-xs font-semibold text-neutral-400 tracking-wide uppercase inline-flex items-center gap-0.5 hover:text-neutral-950 transition-colors duration-300 cursor-pointer group/btn h-fit shrink-0"
           >
-            See Details 
+            See Details
             <ArrowUpRight className="w-3.5 h-3.5 opacity-70 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
           </button>
         </div>

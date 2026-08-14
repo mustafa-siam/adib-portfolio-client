@@ -28,7 +28,7 @@ function getYouTubeId(url?: string): string | null {
   if (!url) return null;
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
   const match = url.match(regExp);
-  return match && match[2].length === 11 ? match[2] : url;
+  return match && match[2].length === 11 ? match[2] : null;
 }
 
 export default function CaseStudyDetailsPage() {
@@ -48,7 +48,7 @@ export default function CaseStudyDetailsPage() {
     <main className="min-h-screen bg-[#FBFBFB] text-neutral-900 pt-16 sm:pt-24 pb-32 selection:bg-neutral-900 selection:text-white">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         {/* Navigation / Return Button */}
-        <div className="w-full flex justify-start mb-8 sm:mb-12 mt-6">
+        <div className="w-full flex justify-start mb-8 sm:mb-12 mt-12">
           <motion.button
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -75,15 +75,6 @@ export default function CaseStudyDetailsPage() {
             animate="show"
             className="flex flex-col items-center max-w-4xl"
           >
-            {/* {study.category && (
-              <motion.div variants={fadeInUp} className="mb-4">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-wider text-neutral-500 uppercase bg-neutral-100 border border-neutral-200/80 px-3.5 py-1 rounded-full">
-                  <Video className="w-3 h-3 text-neutral-700" />
-                  {study.category}
-                </span>
-              </motion.div>
-            )} */}
-
             <motion.h1
               variants={fadeInUp}
               className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-neutral-900 leading-[1.08]"
@@ -129,8 +120,8 @@ export default function CaseStudyDetailsPage() {
               <iframe
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&playsinline=1`}
                 className="absolute inset-0 h-full w-full object-cover"
-                allow="autoplay; encrypted-media"
-                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
                 title={study.title}
               />
             ) : (
@@ -141,20 +132,6 @@ export default function CaseStudyDetailsPage() {
                 priority
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.01]"
               />
-            )}
-
-            {/* Ambient Lighting Overlay */}
-            <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/10 rounded-3xl" />
-
-            {/* Video Meta Badges */}
-            {(study.clientBadge || study.roleBadge) && (
-              <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-white/90 bg-neutral-950/70 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/10 pointer-events-none">
-                <span className="font-medium tracking-wide flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  {study.clientBadge}
-                </span>
-                <span className="text-neutral-400 font-normal">{study.roleBadge}</span>
-              </div>
             )}
           </motion.div>
         </section>
