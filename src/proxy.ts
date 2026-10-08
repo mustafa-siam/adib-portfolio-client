@@ -1,5 +1,4 @@
-import { clerkMiddleware } from '@clerk/nextjs';
-
+import { clerkMiddleware } from '@clerk/nextjs/server';
 export default clerkMiddleware(async (auth, req) => {
   // Check if the current request URL path starts with /dashboard
   if (req.nextUrl.pathname.startsWith('/dashboard')) {
