@@ -1,13 +1,44 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, Variants } from "motion/react";
 import PortfolioCard from "../../common/PortfolioCard";
-import { CASE_STUDIES } from "../../data/case-studies";
+import type { CaseStudy } from "../../data/case-studies";
+import { useGetProjectsQuery } from "@/redux/features/projects/api/projectApi";
+
 const CURSOR_EASE = 0.14;
+const SKELETON_COUNT = 4;
+
+/**
+ * Adapter: backend Project -> the CaseStudy shape PortfolioCard expects.
+ * Adjust the field names if your Project type differs.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const toCaseStudy = (p: any): CaseStudy => ({
+  ...p,
+  id: p._id ?? p.id,
+  slug: p.slug,
+  title: p.title,
+  category: p.category ?? "",
+  tags: p.tags ?? [],
+  poster: p.poster ?? p.thumbnail ?? p.image ?? "",
+  summary: p.summary ?? p.description ?? "",
+  overview: p.overview ?? { heading: "", description: "", stats: [] },
+  process: p.process ?? { heading: "", description: "", steps: [], image: "" },
+});
+
+function CardSkeleton() {
+  return (
+    <div className="animate-pulse">
+      <div className="aspect-[16/10] w-full rounded-3xl bg-neutral-200" />
+      <div className="mt-4 h-5 w-2/3 rounded bg-neutral-200" />
+      <div className="mt-2 h-4 w-1/3 rounded bg-neutral-200" />
+    </div>
+  );
+}
 
 export default function AllWorks() {
   const router = useRouter();
@@ -20,6 +51,14 @@ export default function AllWorks() {
   const target = useRef({ x: 0, y: 0 });
   const rendered = useRef({ x: 0, y: 0 });
   const rafId = useRef<number | null>(null);
+
+  // Dynamic data
+  const { data, isLoading, isError, refetch } = useGetProjectsQuery();
+
+  const projects: CaseStudy[] = useMemo(
+    () => (data ?? []).map(toCaseStudy),
+    [data]
+  );
 
   const containerVariants: Variants = {
     hidden: {},
@@ -77,7 +116,7 @@ export default function AllWorks() {
   return (
     <section className="w-full px-6 sm:px-12 pt-32 pb-24 select-none min-h-screen bg-neutral-50/50">
       <div className="mx-auto max-w-7xl">
-        
+
         <div className="w-full flex justify-start mb-10 sm:mb-14">
           <motion.button
             initial={{ opacity: 0, x: -10 }}
@@ -98,7 +137,7 @@ export default function AllWorks() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:mb-24 mb-16 items-end">
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="show"
@@ -111,7 +150,7 @@ export default function AllWorks() {
               <span className="font-serif text-lg italic tracking-wide text-neutral-500">Selected Index</span>
               <span className="h-px w-8 bg-neutral-400/30" />
             </motion.div>
-            
+
             <motion.h1
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -122,7 +161,7 @@ export default function AllWorks() {
             </motion.h1>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -140,7 +179,30 @@ export default function AllWorks() {
           className="relative grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-24 sm:grid-cols-2"
           style={{ perspective: 1200 }}
         >
-          {CASE_STUDIES.map((item, index) => (
+          {isLoading &&
+            Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+              <CardSkeleton key={i} />
+            ))}
+
+          {isError && !isLoading && (
+            <div className="col-span-full text-center text-neutral-500">
+              <p>Couldn&apos;t load projects.</p>
+              <button
+                onClick={() => refetch()}
+                className="mt-3 rounded-full bg-black px-5 py-2 text-sm text-white"
+              >
+                Try again
+              </button>
+            </div>
+          )}
+
+          {!isLoading && !isError && projects.length === 0 && (
+            <p className="col-span-full text-center text-neutral-500">
+              No projects yet.
+            </p>
+          )}
+
+          {projects.map((item, index) => (
             <PortfolioCard
               key={item.id}
               item={item}
@@ -148,7 +210,7 @@ export default function AllWorks() {
               isHovered={hoveredId === item.id}
               onEnter={() => handleCardEnter(item.id)}
               onLeave={handleCardLeave}
-               onOpen={() => router.push(`/work/${item.slug}`)}
+              onOpen={() => router.push(`/work/${item.slug}`)}
             />
           ))}
 

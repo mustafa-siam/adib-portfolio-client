@@ -6,13 +6,11 @@ import { motion, useScroll, useTransform } from "motion/react";
 export default function FooterSection() {
   const footerRef = useRef<HTMLDivElement>(null);
 
-  // Same animation as previous footer
   const { scrollYProgress } = useScroll({
     target: footerRef,
     offset: ["start end", "end end"],
   });
 
-  // EXACT same animation as previous footer
   const footerContentY = useTransform(
     scrollYProgress,
     [0, 1],
@@ -28,7 +26,6 @@ export default function FooterSection() {
           <div className="absolute top-[-30%] left-[5%] w-[50%] h-[160%] bg-gradient-to-b from-white/[0.04] to-transparent rotate-[28deg] blur-[80px] pointer-events-none will-change-transform" />
         </div>
 
-        {/* SAME animation as previous footer */}
         <motion.div
           style={{ y: footerContentY }}
           className="flex flex-col items-center pt-32 pb-12 w-full max-w-4xl mx-auto flex-1 justify-center z-10"
@@ -54,7 +51,7 @@ export default function FooterSection() {
 
           {/* CTA */}
           <a
-            href="mailto:joris@hanzo.com"
+            href="tel:+8801703530980"
             className="group p-2 bg-white/5 backdrop-blur-md rounded-[3rem] border border-white/10 inline-flex items-center hover:scale-[1.02] active:scale-[0.98] transition-transform"
           >
             <div className="relative bg-white text-black px-8 md:px-10 py-4 rounded-[2.5rem] font-medium text-sm flex items-center justify-center gap-3 overflow-hidden">
@@ -98,51 +95,51 @@ export default function FooterSection() {
         </motion.div>
 
         {/* Bottom Footer */}
-<div className="relative z-10 w-full px-2 md:px-0 pb-12 mt-auto">
-  <div className="flex flex-col md:flex-row items-center justify-between">
+        <div className="relative z-10 w-full px-2 md:px-0 pb-12 mt-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between">
 
-    {/* Left */}
-    <div className="flex flex-col items-start gap-3">
-      <div className="w-36 h-px bg-white/15" />
+            {/* Left */}
+            <div className="flex flex-col items-start gap-3">
+              <div className="w-36 h-px bg-white/15" />
 
-      <span className="text-[15px] text-neutral-300 tracking-tight">
-        All rights reserved by Ishraq Al Adib @2026
-      </span>
-    </div>
+              <span className="text-[15px] text-neutral-300 tracking-tight">
+                All rights reserved by Ishraq Al Adib @2026
+              </span>
+            </div>
 
-    {/* Right */}
-    <div className="flex items-center gap-5 mt-10 md:mt-0">
-      {["@", "X", "Ln", "Ig"].map((social) => (
-        <a
-          key={social}
-          href="#"
-          className="
-            group
-            w-11
-            h-11
-            rounded-full
-            border
-            border-white/15
-            flex
-            items-center
-            justify-center
-            text-[13px]
-            font-medium
-            text-neutral-400
-            transition-all
-            duration-300
-            hover:border-white/40
-            hover:text-white
-            hover:bg-white/[0.03]
-          "
-        >
-          {social}
-        </a>
-      ))}
-    </div>
+            {/* Right */}
+            <div className="flex items-center gap-5 mt-10 md:mt-0">
+              {["@", "X", "Ln", "Ig"].map((social) => (
+                <a
+                  key={social}
+                  href="#"
+                  className="
+                    group
+                    w-11
+                    h-11
+                    rounded-full
+                    border
+                    border-white/15
+                    flex
+                    items-center
+                    justify-center
+                    text-[13px]
+                    font-medium
+                    text-neutral-400
+                    transition-all
+                    duration-300
+                    hover:border-white/40
+                    hover:text-white
+                    hover:bg-white/[0.03]
+                  "
+                >
+                  {social}
+                </a>
+              ))}
+            </div>
 
-  </div>
-</div>
+          </div>
+        </div>
       </div>
     </footer>
   );

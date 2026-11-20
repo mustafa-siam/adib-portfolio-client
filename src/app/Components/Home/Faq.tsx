@@ -94,7 +94,7 @@ export default function FAQSection() {
   ];
 
   return (
-    <section className="w-full px-6 pb-10 md:pb-20 overflow-hidden text-[#1A1A1A] font-sans select-none">
+    <section id='faq' className="w-full px-6 pb-10 md:pb-20 overflow-hidden text-[#1A1A1A] font-sans select-none">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           variants={containerVariants}
@@ -148,7 +148,7 @@ export default function FAQSection() {
               </div>
 
               <a 
-  href="#"
+   href="/contact"
   className="group p-2 bg-white/80 backdrop-blur-md rounded-[3rem] shadow-[0px_8px_24px_rgba(0,0,0,0.06),0px_16px_48px_rgba(0,0,0,0.04)] inline-flex items-center hover:scale-[1.02] active:scale-[0.98] transition-transform w-full"
 >
   <div className="relative w-full bg-black text-white px-6 md:px-10 py-4 md:py-[1.125rem] rounded-[2.5rem] font-normal text-sm flex items-center justify-center gap-3 overflow-hidden">
@@ -179,7 +179,14 @@ export default function FAQSection() {
 
               <p className="text-sm text-neutral-400 font-normal w-full text-center mt-4
                ">
-                Or, email me at <a href="mailto:joris@hanzo.com" className="text-[#FF5C35] hover:underline transition-all">ishraqaladib@gmail.com</a>
+                Or, email me at <a
+  href="https://mail.google.com/mail/?view=cm&fs=1&to=ishraqaladib@gmail.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-[#FF5C35] hover:underline transition-all"
+>
+  ishraqaladib@gmail.com
+</a>
               </p>
             </motion.div>
           </div>

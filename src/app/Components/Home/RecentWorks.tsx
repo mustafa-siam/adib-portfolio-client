@@ -1,15 +1,45 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import PortfolioCard from "../common/PortfolioCard";
 import { motion, Variants } from "motion/react";
-import { CASE_STUDIES } from "../data/case-studies";
+import type { CaseStudy } from "../data/case-studies";
+import { useGetProjectsQuery } from "@/redux/features/projects/api/projectApi";
 
 const CURSOR_EASE = 0.14;
+const MAX_RECENT = 4; // how many projects to show on the home page
+
+/**
+ * Adapter: backend Project -> the CaseStudy shape PortfolioCard expects.
+ * Adjust the field names if your Project type differs.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const toCaseStudy = (p: any): CaseStudy => ({
+  ...p,
+  id: p._id ?? p.id,
+  slug: p.slug,
+  title: p.title,
+  category: p.category ?? "",
+  tags: p.tags ?? [],
+  poster: p.poster ?? p.thumbnail ?? p.image ?? "",
+  summary: p.summary ?? p.description ?? "",
+  overview: p.overview ?? { heading: "", description: "", stats: [] },
+  process: p.process ?? { heading: "", description: "", steps: [], image: "" },
+});
+
+function CardSkeleton() {
+  return (
+    <div className="animate-pulse">
+      <div className="aspect-[16/10] w-full rounded-3xl bg-neutral-200" />
+      <div className="mt-4 h-5 w-2/3 rounded bg-neutral-200" />
+      <div className="mt-2 h-4 w-1/3 rounded bg-neutral-200" />
+    </div>
+  );
+}
 
 export default function RecentWork() {
   const router = useRouter();
@@ -23,6 +53,14 @@ export default function RecentWork() {
   const target = useRef({ x: 0, y: 0 });
   const rendered = useRef({ x: 0, y: 0 });
   const rafId = useRef<number | null>(null);
+
+  // Dynamic data
+  const { data, isLoading, isError, refetch } = useGetProjectsQuery();
+
+  const projects: CaseStudy[] = useMemo(
+    () => (data ?? []).slice(0, MAX_RECENT).map(toCaseStudy),
+    [data]
+  );
 
   const containerVariants: Variants = {
     hidden: {},
@@ -95,7 +133,7 @@ export default function RecentWork() {
 
   return (
     <section
-      id="recent-work"
+      id="work"
       ref={sectionRef}
       className="w-full px-6 select-none"
     >
@@ -134,7 +172,30 @@ export default function RecentWork() {
         className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-12 sm:gap-y-20 sm:grid-cols-2"
         style={{ perspective: 1200 }}
       >
-        {CASE_STUDIES.map((item, index) => (
+        {isLoading &&
+          Array.from({ length: MAX_RECENT }).map((_, i) => (
+            <CardSkeleton key={i} />
+          ))}
+
+        {isError && !isLoading && (
+          <div className="col-span-full text-center text-neutral-500">
+            <p>Couldn&apos;t load projects.</p>
+            <button
+              onClick={() => refetch()}
+              className="mt-3 rounded-full bg-black px-5 py-2 text-sm text-white"
+            >
+              Try again
+            </button>
+          </div>
+        )}
+
+        {!isLoading && !isError && projects.length === 0 && (
+          <p className="col-span-full text-center text-neutral-500">
+            No projects yet.
+          </p>
+        )}
+
+        {projects.map((item, index) => (
           <PortfolioCard
             key={item.id}
             item={item}

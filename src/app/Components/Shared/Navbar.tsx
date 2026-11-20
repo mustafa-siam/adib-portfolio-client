@@ -8,9 +8,8 @@ const NAV_LINKS = [
   { label: "Process", href: "#process" },
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
-  { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const SOCIALS = [
@@ -152,13 +151,6 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 + NAV_LINKS.length * 0.04, duration: 0.25 }}
                   >
-                    <a
-                      href="#get-template"
-                      className="font-medium text-orange-600 transition-opacity hover:opacity-70"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Get Template
-                    </a>
                   </motion.li>
                 </ul>
 

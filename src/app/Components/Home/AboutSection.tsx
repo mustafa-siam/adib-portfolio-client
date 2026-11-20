@@ -101,7 +101,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="w-full px-6 overflow-hidden text-[#1A1A1A] font-sans select-none">
+    <section id='about' className="w-full px-6 overflow-hidden text-[#1A1A1A] font-sans select-none">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           variants={containerVariants}
